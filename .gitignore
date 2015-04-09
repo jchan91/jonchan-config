@@ -1,0 +1,16 @@
+# Ignore everything except my config files
+*
+!.gitignore
+
+# Emacs files
+!.emacs.d
+!.emacs.d/**
+!.emacs
+
+# Bash profiles
+!.bashrc
+!.bash_custom
+!.bash_aliases
+
+# Vim profile
+#!.vimrc (currently don't have this yet)
