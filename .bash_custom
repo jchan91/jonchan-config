@@ -16,20 +16,26 @@ shopt -s histappend                          # Append to history, don't overwrit
 #export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/sandbox/ros_ws/dvo_slam
 
 
+##################################################################
+## Startup some useful programs if we can
+##################################################################
+
+# Use xclip for unified copy/paste across emacs/terminal clipboards
+[ $(pgrep -c "xclip") -eq 0 ] && (xclip &)
+
 ###################################################################
 ## PROMPT_COMMAND stuff. Careful here
 ###################################################################
 # We begin here, assuming PROMPT_COMMAND is empty
-
-# After each command, append the history file and reread it
-export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 # After each command, check whether or not there's a new bashrc
 bashrc_sourced=$(stat -c %Y ~/.bashrc)
 bash_custom_sourced=$(stat -c %Y ~/.bash_custom)
 bash_aliases_sourced=$(stat -c %Y ~/.bash_aliases)
 
-# TODO: This doesn't work yet...
-export PROMPT_COMMAND="
-       $PROMPT_COMMAND${PROMPT_COMMAND:+}
-       (test $(stat -c %Y ~/.bashrc) -ne $bashrc_sourced || test $(stat -c %Y ~/.bash_custom) -ne $bash_custom_sourced || test $(stat -c %Y ~/.bash_aliases) -ne $bash_aliases_sourced) && source ~/.bashrc"
+# Note: Careful here, you need to use single quotes for the test commands
+export PROMPT_COMMAND='
+       (test $(stat -c %Y ~/.bashrc) -ne $bashrc_sourced || test $(stat -c %Y ~/.bash_custom) -ne $bash_custom_sourced || test $(stat -c %Y ~/.bash_aliases) -ne $bash_aliases_sourced) && source ~/.bashrc;'
+
+# After each command, append the history file and reread it
+export PROMPT_COMMAND="$PROMPT_COMMAND${PROMPT_COMMAND:+}history -a; history -c; history -r;"

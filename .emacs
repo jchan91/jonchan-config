@@ -24,3 +24,17 @@
    (format "ctags %s"(directory-file-name dir-name)))
 ;   (format "ctags -f %s -e -R %s" path-to-ctags (directory-file-name dir-name)))
   )
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  )
+
+;(add-to-list 'load-path "~/.emacs.d/elpa")
+;(require 'xclip)
+;(load "xclip")
+(xclip-mode 1)
+;(setq x-select-enable-clipboard t)
+;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+;(setq x-select-enable-primary nil)
