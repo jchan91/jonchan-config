@@ -1,3 +1,6 @@
+; Detect OS
+(setq IS_LINUX (eq system-type `gnu/linux))
+
 ; Change go-to-line shortcut
 (global-set-key "\M-g" 'goto-line)
 
@@ -15,6 +18,17 @@
 ; Show unique file path names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+; Save backup files to a single location instead of current directory
+(if IS_LINUX
+  (
+    setq backup-directory-alist `(("." . "C:\Users\jonchan\AppData\Roaming\.emacs.d\.saves"))
+  )
+  (
+    setq backup-directory-alist `(("." . "~/.emacs.d/.saves"))
+  )
+)
+
 
 ; Define ctag functionality (not yet working)
 (defun create-tags (dir-name)
