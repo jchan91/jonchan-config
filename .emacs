@@ -1,5 +1,5 @@
 ; Detect OS
-(setq IS_LINUX (eq system-type `gnu/linux))
+;(setq IS_LINUX (eq system-type `gnu/linux))
 
 ; Change go-to-line shortcut
 (global-set-key "\M-g" 'goto-line)
@@ -9,7 +9,7 @@
 
 ; Line numbering
 (global-linum-mode 1)
-(setq linum-format "%2d \u2502")
+(setq linum-format "%d  ")
 
 ; Tabs
 (setq-default indent-tabs-mode nil)
@@ -20,7 +20,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ; Save backup files to a single location instead of current directory
-setq backup-directory-alist `(("." . "C:\Users\jonchan\AppData\Roaming\.emacs.d\.saves"))
+(setq backup-directory-alist `(("." . ,"C:\\Users\\jonchan\\AppData\\Roaming\\.emacs.d\\.saves")))
 
 ; Define ctag functionality (not yet working)
 (defun create-tags (dir-name)
