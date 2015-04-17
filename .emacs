@@ -20,15 +20,7 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ; Save backup files to a single location instead of current directory
-(if IS_LINUX
-  (
-    setq backup-directory-alist `(("." . "C:\Users\jonchan\AppData\Roaming\.emacs.d\.saves"))
-  )
-  (
-    setq backup-directory-alist `(("." . "~/.emacs.d/.saves"))
-  )
-)
-
+setq backup-directory-alist `(("." . "C:\Users\jonchan\AppData\Roaming\.emacs.d\.saves"))
 
 ; Define ctag functionality (not yet working)
 (defun create-tags (dir-name)
@@ -48,7 +40,7 @@
 ;(add-to-list 'load-path "~/.emacs.d/elpa")
 ;(require 'xclip)
 ;(load "xclip")
-(xclip-mode 1)
+;(xclip-mode 1)
 ;(setq x-select-enable-clipboard t)
 ;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 ;(setq x-select-enable-primary nil)
