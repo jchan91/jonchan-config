@@ -16,6 +16,11 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+; For .m files
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
 ; Define ctag functionality (not yet working)
 (defun create-tags (dir-name)
   "Create tags file."
