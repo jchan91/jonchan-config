@@ -3,7 +3,7 @@ alias emacs="emacs -nw "
 alias chrome="google-chrome"
 
 # Set common home locations
-alias sandbox='cd /home/analog/sandbox'
+alias sandbox='cd /home/$USER/sandbox'
 #alias whome="cd /cygdrive/c/Users/jonathan"
 
 # Git stuff
