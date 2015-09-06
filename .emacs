@@ -77,6 +77,14 @@
 (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
 (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
+; Overwrite general default bindings with helm's
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+
+; Company mode
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+
 ;(add-to-list 'load-path "~/.emacs.d/elpa")
 ;(require 'xclip)
 ;(load "xclip")
