@@ -1,51 +1,3 @@
-; Detect OS
-;(setq IS_LINUX (eq system-type `gnu/linux))
-
-; Color theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'solarized t)
-
-; Use light color themes for emacs GUI, dark for terminal
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (let ((mode (if (display-graphic-p frame) 'light 'dark)))
-              (set-frame-parameter frame 'background-mode mode)
-              (set-terminal-parameter frame 'background-mode mode))
-            (enable-theme 'solarized)))
-
-; Disable tool-bar in GUI mode
-(tool-bar-mode -1)
-
-; Change go-to-line shortcut
-(global-set-key "\M-g" 'goto-line)
-
-; Allow overwriting of highlighted text
-(delete-selection-mode 1)
-
-; Line numbering
-(global-linum-mode 1)
-(setq linum-format "%d  ")
-
-; Tabs
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq indent-line-function 'insert-tab)
-
-; Show unique file path names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
-
-; Save backup files to a single location instead of current directory
-(setq backup-directory-alist `(("." . ,"C:\\Users\\jonchan\\AppData\\Roaming\\.emacs.d\\.saves")))
-
-; Require MELPA
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
-
-; Load helm config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; General Helm config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -119,27 +71,4 @@
 ;; user: When you want to define your own style
 (setq
  c-default-style "linux" ;; set style to "linux"
- )
-
-
-;(add-to-list 'load-path "~/.emacs.d/elpa")
-;(require 'xclip)
-;(load "xclip")
-;(xclip-mode 1)
-;(setq x-select-enable-clipboard t)
-;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
-;(setq x-select-enable-primary nil)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(frame-background-mode (quote dark))
- '(inhibit-startup-screen t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  )
