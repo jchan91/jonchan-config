@@ -23,21 +23,6 @@
 ; Save backup files to a single location instead of current directory
 (setq backup-directory-alist `(("." . ,"C:\\Users\\jonchan\\AppData\\Roaming\\.emacs.d\\.saves")))
 
-; Define ctag functionality (not yet working)
-(defun create-tags (dir-name)
-  "Create tags file."
-  (interactive "DDirectory: ")
-  (shell-command
-   (format "ctags %s"(directory-file-name dir-name)))
-;   (format "ctags -f %s -e -R %s" path-to-ctags (directory-file-name dir-name)))
-  )
-
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
-
 ;(add-to-list 'load-path "~/.emacs.d/elpa")
 ;(require 'xclip)
 ;(load "xclip")
