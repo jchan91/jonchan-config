@@ -40,15 +40,6 @@
 
 ; C/C++ stuff
 
-; Define ctag functionality (not yet working)
-(defun create-tags (dir-name)
-  "Create tags file."
-  (interactive "DDirectory: ")
-  (shell-command
-   (format "ctags %s"(directory-file-name dir-name)))
-;   (format "ctags -f %s -e -R %s" path-to-ctags (directory-file-name dir-name)))
-  )
-
 ; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 

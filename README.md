@@ -8,5 +8,11 @@
 ## Dependencies
 
 ### Emacs
-- xclip for emacs
+- xclip
 - xclip for OS
+- Flycheck
+- gtags
+- Helm
+- Helm-gtags
+- company
+- Semantic
