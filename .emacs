@@ -16,6 +16,9 @@
 ; Disable tool-bar in GUI mode
 (tool-bar-mode -1)
 
+; Show matching parentheses
+(show-paren-mode 1)
+
 ; Change go-to-line shortcut
 (global-set-key "\M-g" 'goto-line)
 
@@ -30,6 +33,8 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
+(setq c-default-style "linux"
+          c-basic-offset 4)
 
 ; Show unique file path names
 (require 'uniquify)
