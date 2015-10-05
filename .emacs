@@ -12,6 +12,9 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 
+; Show matching parentheses
+(show-paren-mode 1)
+
 ; Show unique file path names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
