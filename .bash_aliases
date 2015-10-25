@@ -7,7 +7,7 @@ alias sandbox='cd /home/$USER/sandbox'
 #alias whome="cd /cygdrive/c/Users/jonathan"
 
 # Git stuff
-alias gitlog="git log --pretty=format:\"%h %s\" --graph"
+alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gitdiff="git difftool -y"
 
 # Open window explorer via CmdPrompt style
