@@ -5,6 +5,12 @@
 
 ;;;; Code:
 
+; Disable tool-bar in GUI mode
+(tool-bar-mode -1)
+
+; Show matching parentheses
+(show-paren-mode 1)
+
 ; Change go-to-line shortcut
 (global-set-key "\M-g" 'goto-line)
 
@@ -22,10 +28,6 @@
 (setq c-default-style "linux"
           c-basic-offset 4)
 
-
-; Show matching parentheses
-(show-paren-mode 1)
-
 ; Show unique file path names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -34,6 +36,9 @@
 (autoload 'octave-mode "octave-mod" nil t)
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+; Save backup files to a single location instead of current directory
+(setq backup-directory-alist `(("." . ,"~/.emacs.d/.saves")))
 
 ; Require package
 (when (>= emacs-major-version 24)
@@ -47,7 +52,9 @@
 
 ; C/C++ stuff
 
-; Flycheck
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Flycheck
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ; Enable helm-gtags mode
@@ -111,16 +118,24 @@
 ; Let helm auto-resize its window for itself
 (helm-autoresize-mode nil)
 
-; Company mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Company mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
-; Setup semantic for system headers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Semantic
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (semantic-mode 1)
 (semantic-add-system-include "/usr/local/include/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/ceres/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/eigen3/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/vtk-6.2/" 'c++-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; General C/C++ stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; C-default style
 ;; Available C style:
@@ -141,7 +156,6 @@
 ;(add-to-list 'load-path "~/.emacs.d/elpa")
 ;(require 'xclip)
 ;(load "xclip")
-(xclip-mode 1)
 ;(setq x-select-enable-clipboard t)
 ;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 ;(setq x-select-enable-primary nil)
