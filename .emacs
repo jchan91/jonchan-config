@@ -5,6 +5,10 @@
 
 ;;;; Code:
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; General stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; Disable tool-bar in GUI mode
 (tool-bar-mode -1)
 
@@ -40,17 +44,26 @@
 ; Save backup files to a single location instead of current directory
 (setq backup-directory-alist `(("." . ,"~/.emacs.d/.saves")))
 
-; Require package
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; package
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'package)
+;(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+(package-initialize)
 
 ; Universal clipboard
 (xclip-mode 1)
 
-; C/C++ stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; C/C++ stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Flycheck
@@ -127,11 +140,41 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Semantic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'cc-mode)
+(require 'semantic)
+(require 'semantic/analyze/debug)
+
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+
 (semantic-mode 1)
+
 (semantic-add-system-include "/usr/local/include/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/ceres/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/eigen3/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/vtk-6.2/" 'c++-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; function-args
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'function-args)
+(fa-config-default)
+(define-key c-mode-map  [(control tab)] 'moo-complete)
+(define-key c++-mode-map  [(control tab)] 'moo-complete)
+(define-key c-mode-map (kbd "M-o")  'fa-show)
+(define-key c++-mode-map (kbd "M-o")  'fa-show)
+
+; Assume headers are going to be c++ mode
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+; Case insensitivity
+(set-default 'semantic-case-fold t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; EDE
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ede)
+(global-ede-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; General C/C++ stuff
@@ -159,3 +202,15 @@
 ;(setq x-select-enable-clipboard t)
 ;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 ;(setq x-select-enable-primary nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ede-project-directories (quote ("/home/analog/sandbox/src/hello/app"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
