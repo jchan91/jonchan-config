@@ -18,6 +18,10 @@
 ; Tabs
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
+(setq indent-line-function 'insert-tab)
+(setq c-default-style "linux"
+          c-basic-offset 4)
+
 
 ; Show matching parentheses
 (show-paren-mode 1)
