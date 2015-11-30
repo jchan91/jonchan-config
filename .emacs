@@ -40,6 +40,11 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+; For .m files
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
 ; Save backup files to a single location instead of current directory
 (setq backup-directory-alist `(("." . ,"C:\\Users\\jonchan\\AppData\\Roaming\\.emacs.d\\.saves")))
 
@@ -52,6 +57,9 @@
 
 ; Improve performance in loading large files
 (require 'vlf-setup)
+(custom-set-variables
+ '(vlf-application 'dont-ask))
+
 ;(defun my-find-file-check-make-large-file-read-only-hook ()
 ;  "If a file is over a given size, make the buffer read only."
 ;  (when (> (buffer-size) (* 1024 1024))
