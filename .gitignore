@@ -6,6 +6,7 @@
 !.emacs.d
 !.emacs.d/**
 !.emacs
+.emacs.d/elpa
 
 # Bash profiles
 !.bashrc
