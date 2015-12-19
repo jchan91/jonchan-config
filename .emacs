@@ -49,8 +49,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'package)
-;(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -150,6 +150,8 @@
 (semantic-mode 1)
 
 (semantic-add-system-include "/usr/local/include/" 'c++-mode)
+(semantic-add-system-include "/usr/include/" `c++-mode)
+(semantic-add-system-include "/usr/include/c++/4.8/bits/" `c++-mode)
 (semantic-add-system-include "/usr/local/include/ceres/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/eigen3/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/vtk-6.2/" 'c++-mode)
