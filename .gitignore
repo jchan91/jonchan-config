@@ -6,7 +6,7 @@
 !.emacs.d
 !.emacs.d/**
 !.emacs
-.emacs.d/elpa/archives/gnu/archive-contents
+.emacs.d/elpa
 
 # Bash profiles
 !.bashrc
@@ -15,3 +15,9 @@
 
 # Vim profile
 !.vimrc
+
+# EDE Project files
+.emacs.d/ede-projects.el
+
+# Auto-generated files
+.emacs.d/recentf
