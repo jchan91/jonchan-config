@@ -49,11 +49,12 @@
 (setq backup-directory-alist `(("." . ,"C:\\Users\\jonchan\\AppData\\Roaming\\.emacs.d\\.saves")))
 
 ; Require MELPA
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 ; Improve performance in loading large files
 (require 'vlf-setup)
