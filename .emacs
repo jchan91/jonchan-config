@@ -1,17 +1,41 @@
-; Detect OS
-;(setq IS_LINUX (eq system-type `gnu/linux))
+;;; package --- Summary:
 
-; Color theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'solarized t)
+;;;; Commentary:
+; jonchan's .emacs configuration
 
-; Use light color themes for emacs GUI, dark for terminal
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (let ((mode (if (display-graphic-p frame) 'light 'dark)))
-              (set-frame-parameter frame 'background-mode mode)
-              (set-terminal-parameter frame 'background-mode mode))
-            (enable-theme 'solarized)))
+;;;; Code:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; General stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq USING_WINDOWS (eq system-type 'windows-nt))
+(setq USING_LINUX (eq system-type 'gnu/linux))
+
+; Windows specific settings
+(when USING_WINDOWS
+  ; Color theme
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+  (load-theme 'solarized t)
+
+  ; Use light color themes for emacs GUI, dark for terminal
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (let ((mode (if (display-graphic-p frame) 'light 'dark)))
+                (set-frame-parameter frame 'background-mode mode)
+                (set-terminal-parameter frame 'background-mode mode))
+              (enable-theme 'solarized)))
+
+  ; Save backup files to a single location instead of current directory
+  (setq backup-directory-alist
+        `(("." . ,(concat (getenv "APPDATA") "\\.emacs.d\\.saves"))))
+  )
+
+(when USING_LINUX
+  ; Save backup files to a single location instead of current directory
+  (setq backup-directory-alist `(("." . ,"~/.emacs.d/.saves")))
+  )
+
 
 ; Disable tool-bar in GUI mode
 (tool-bar-mode -1)
@@ -27,11 +51,11 @@
 
 ; Line numbering
 (global-linum-mode 1)
-(setq linum-format "%d  ")
+(setq linum-format "%2d \u2502")
 
 ; Tabs
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
+(setq tab-width 4)
 (setq indent-line-function 'insert-tab)
 (setq c-default-style "linux"
           c-basic-offset 4)
@@ -45,32 +69,73 @@
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
 
-; Save backup files to a single location instead of current directory
-(setq backup-directory-alist `(("." . ,"C:\\Users\\jonchan\\AppData\\Roaming\\.emacs.d\\.saves")))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; package
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Require MELPA
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-; Improve performance in loading large files
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; xclip - Universal clipboard
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;(require 'xclip)
+;(xclip-mode 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; vlf - Very large file optimizations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'vlf-setup)
 (custom-set-variables
- '(vlf-application 'dont-ask))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ede-project-directories (quote ("/home/analog/sandbox/src/hello/app")))
+ '(inhibit-startup-screen t)
+ '(vlf-application (quote dont-ask)))
 
-;(defun my-find-file-check-make-large-file-read-only-hook ()
-;  "If a file is over a given size, make the buffer read only."
-;  (when (> (buffer-size) (* 1024 1024))
-;    (setq buffer-read-only t)
-;    (buffer-disable-undo)
-;    (fundamental-mode)))
-;
-;(add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; C/C++ stuff
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Load helm config
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Flycheck
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+; Enable helm-gtags mode
+(setq
+ helm-gtags-ignore-case t
+ helm-gtags-auto-update t
+ helm-gtags-use-input-at-cursor t
+ helm-gtags-pulse-at-cursor t
+ helm-gtags-prefix-key "\C-cg"
+ helm-gtags-suggested-key-mapping t
+ )
+
+(require 'helm-gtags)
+
+(add-hook 'dired-mode-hook 'helm-gtags-mode)
+(add-hook 'eshell-mode-hook 'helm-gtags-mode)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
+(add-hook 'asm-mode-hook 'helm-gtags-mode)
+
+(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+(define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
+(define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+(define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+(define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; General Helm config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -110,21 +175,49 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Company mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Semantic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'cc-mode)
+(require 'semantic)
+(require 'semantic/analyze/debug)
 
-; Setup semantic for system headers
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+
 (semantic-mode 1)
+
 (semantic-add-system-include "/usr/local/include/" 'c++-mode)
+(semantic-add-system-include "/usr/include/" `c++-mode)
+(semantic-add-system-include "/usr/include/c++/4.8/bits/" `c++-mode)
 (semantic-add-system-include "/usr/local/include/ceres/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/eigen3/" 'c++-mode)
 (semantic-add-system-include "/usr/local/include/vtk-6.2/" 'c++-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; function-args
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'function-args)
+(fa-config-default)
+(define-key c-mode-map  [(control tab)] 'moo-complete)
+(define-key c++-mode-map  [(control tab)] 'moo-complete)
+(define-key c-mode-map (kbd "M-o")  'fa-show)
+(define-key c++-mode-map (kbd "M-o")  'fa-show)
+
+; Assume headers are going to be c++ mode
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+; Case insensitivity
+(set-default 'semantic-case-fold t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; EDE
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ede)
+(global-ede-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; General C/C++ stuff
@@ -132,36 +225,21 @@
 
 ; C-default style
 ;; Available C style:
-;; gnu: The default style for GNU projects
-;; k&r: What Kernighan and Ritchie, the authors of C used in their book
-;; bsd: What BSD developers use, aka Allman style after Eric Allman.
-;; whitesmith: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.
-;; stroustrup: What Stroustrup, the author of C++ used in his book
-;; ellemtel: Popular C++ coding standards as defined by Programming in C++, Rules and Recommendations, Erik Nyquist and Mats Henricson, Ellemtel
-;; linux: What the Linux developers use for kernel development
-;; python: What Python developers use for extension modules
-;; java: The default style for java-mode (see below)
-;; user: When you want to define your own style
+;; “gnu”: The default style for GNU projects
+;; “k&r”: What Kernighan and Ritchie, the authors of C used in their book
+;; “bsd”: What BSD developers use, aka “Allman style” after Eric Allman.
+;; “whitesmith”: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.
+;; “stroustrup”: What Stroustrup, the author of C++ used in his book
+;; “ellemtel”: Popular C++ coding standards as defined by “Programming in C++, Rules and Recommendations,” Erik Nyquist and Mats Henricson, Ellemtel
+;; “linux”: What the Linux developers use for kernel development
+;; “python”: What Python developers use for extension modules
+;; “java”: The default style for java-mode (see below)
+;; “user”: When you want to define your own style
 (setq
  c-default-style "linux" ;; set style to "linux"
  )
 
 
-;(add-to-list 'load-path "~/.emacs.d/elpa")
-;(require 'xclip)
-;(load "xclip")
-;(xclip-mode 1)
-;(setq x-select-enable-clipboard t)
-;(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
-;(setq x-select-enable-primary nil)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(frame-background-mode (quote dark))
- '(inhibit-startup-screen t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
