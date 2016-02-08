@@ -68,6 +68,13 @@
 (autoload 'octave-mode "octave-mod" nil t)
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
+(add-hook 'octave-mode-hook (lambda ()
+  (setq indent-tabs-mode nil)
+  (setq tab-stop-list (number-sequence 4 200 4))
+  (setq tab-width 4)
+  (setq indent-line-function 'insert-tab)
+  (setq tab-always-indent nil) ))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; package
