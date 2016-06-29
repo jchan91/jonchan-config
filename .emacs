@@ -36,6 +36,8 @@
   (setq backup-directory-alist `(("." . ,"~/.emacs.d/.saves")))
   )
 
+; Set default major mode to text-mode
+(setq-default major-mode 'text-mode)
 
 ; Disable tool-bar in GUI mode
 (tool-bar-mode -1)
@@ -58,7 +60,15 @@
 (setq tab-width 4)
 (setq indent-line-function 'insert-tab)
 (setq c-default-style "linux"
-          c-basic-offset 4)
+      c-basic-offset 4)
+
+; .cmd and .bat files
+(add-hook 'bat-mode-hook (lambda ()
+  (setq indent-tabs-mode nil)
+  (setq tab-stop-list (number-sequence 0 200 4))
+  (setq tab-width 4)
+  (setq indent-line-function 'indent-relative)
+  (setq tab-always-indent nil) ))
 
 ; Show unique file path names
 (require 'uniquify)
