@@ -128,30 +128,32 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-; Enable helm-gtags mode
-(setq
- helm-gtags-ignore-case t
- helm-gtags-auto-update t
- helm-gtags-use-input-at-cursor t
- helm-gtags-pulse-at-cursor t
- helm-gtags-prefix-key "\C-cg"
- helm-gtags-suggested-key-mapping t
- )
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;;;;; helm-gtags
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (setq
+;;  helm-gtags-ignore-case t
+;;  helm-gtags-auto-update t
+;;  helm-gtags-use-input-at-cursor t
+;;  helm-gtags-pulse-at-cursor t
+;;  helm-gtags-prefix-key "\C-cg"
+;;  helm-gtags-suggested-key-mapping t
+;;  )
 
-(require 'helm-gtags)
+;; (require 'helm-gtags)
 
-(add-hook 'dired-mode-hook 'helm-gtags-mode)
-(add-hook 'eshell-mode-hook 'helm-gtags-mode)
-(add-hook 'c-mode-hook 'helm-gtags-mode)
-(add-hook 'c++-mode-hook 'helm-gtags-mode)
-(add-hook 'asm-mode-hook 'helm-gtags-mode)
+;; (add-hook 'dired-mode-hook 'helm-gtags-mode)
+;; (add-hook 'eshell-mode-hook 'helm-gtags-mode)
+;; (add-hook 'c-mode-hook 'helm-gtags-mode)
+;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
+;; (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
-(define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-(define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
-(define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-(define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-(define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-(define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+;; (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+;; (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
+;; (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+;; (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+;; (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+;; (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; General Helm config
@@ -200,19 +202,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'cc-mode)
 (require 'semantic)
-(require 'semantic/analyze/debug)
+;; (require 'semantic/analyze/debug)
 
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
 
 (semantic-mode 1)
 
-(semantic-add-system-include "/usr/local/include/" 'c++-mode)
-(semantic-add-system-include "/usr/include/" `c++-mode)
-(semantic-add-system-include "/usr/include/c++/4.8/bits/" `c++-mode)
-(semantic-add-system-include "/usr/local/include/ceres/" 'c++-mode)
-(semantic-add-system-include "/usr/local/include/eigen3/" 'c++-mode)
-(semantic-add-system-include "/usr/local/include/vtk-6.2/" 'c++-mode)
+(when USING_LINUX
+  (semantic-add-system-include "/usr/local/include/" 'c++-mode)
+  (semantic-add-system-include "/usr/include/" `c++-mode)
+  (semantic-add-system-include "/usr/include/c++/4.8/bits/" `c++-mode)
+  (semantic-add-system-include "/usr/local/include/ceres/" 'c++-mode)
+  (semantic-add-system-include "/usr/local/include/eigen3/" 'c++-mode)
+  (semantic-add-system-include "/usr/local/include/vtk-6.2/" 'c++-mode)
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; function-args
@@ -233,8 +237,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; EDE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'ede)
-(global-ede-mode)
+;; (require 'ede)
+;; (global-ede-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; General C/C++ stuff
