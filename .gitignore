@@ -21,3 +21,9 @@
 
 # Auto-generated files
 .emacs.d/recentf
+
+# Windows settings
+!profile.cmd
+!sublime.cmd
+!setenlistenv.bat
+!ConEmu.xml
