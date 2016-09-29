@@ -70,6 +70,15 @@
   (setq indent-line-function 'indent-relative)
   (setq tab-always-indent nil) ))
 
+; .ini files
+(add-hook 'conf-windows-mode-hook (lambda ()
+  (setq indent-tabs-mode nil)
+  (setq tab-stop-list (number-sequence 0 200 4))
+  (setq tab-width 4)
+  (setq indent-line-function 'indent-relative)
+  (setq tab-always-indent nil) ))
+
+
 ; Show unique file path names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -196,6 +205,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Company-jedi backend
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Semantic
