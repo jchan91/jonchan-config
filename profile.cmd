@@ -26,7 +26,7 @@ REM Useful utility commands
 DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY gitlog=git log --pretty=format:"%C(yellow)%h%Cred%d%Creset - %C(cyan)%an %Creset: %s %Cgreen(%cr)" --graph
 DOSKEY npp=notepad++.exe $1
-DOSKEY sublime=sublime_text.exe -n $*
+DOSKEY sublime=start sublime_text.exe -n $*
 DOSKEY emacs=start emacs $1 $2 
 DOSKEY editprofile=sublime_text.exe -n C:\Users\jonchan\AppData\Roaming\profile.cmd
 DOSKEY sourceprofile=call C:\Users\jonchan\AppData\Roaming\profile.cmd
