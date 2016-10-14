@@ -675,21 +675,21 @@
 					<value name="Cmd2" type="string" data="-new_console:d:D:\"/>
 					<value name="Cmd3" type="string" data="C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
 				</key>
-				<key name="Task13" modified="2016-09-29 15:04:39" build="150319">
+				<key name="Task13" modified="2016-10-14 10:52:21" build="150319">
 					<value name="Name" type="string" data="{cmd Razzle}"/>
 					<value name="Flags" type="dword" data="00000001"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:E:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 					<value name="Cmd2" type="string" data="set PROMPT=$_$E[0m[$E[33m$P$E[0m]$S &amp; cmd.exe"/>
 				</key>
 			</key>
-			<key name="Apps" modified="2016-09-29 15:04:39" build="150319">
+			<key name="Apps" modified="2016-10-14 10:52:21" build="150319">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
-			<key name="Colors" modified="2016-09-29 15:04:39" build="150319">
+			<key name="Colors" modified="2016-10-14 10:52:21" build="150319">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
 		</key>
