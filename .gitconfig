@@ -1,0 +1,20 @@
+[alias]
+	d = difftool
+	lga = log --branches --remotes --tags --graph --decorate --oneline
+	lg = log --graph --decorate --oneline
+	s = status
+	ch = checkout
+	f = fetch --all
+	c = commit
+	au = add -u :/
+[core]
+	editor = emacs -nw
+	autocrlf = true
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[push]
+	default = upstream
+[merge]
+	tool = meld

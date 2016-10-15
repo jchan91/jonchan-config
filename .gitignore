@@ -27,3 +27,6 @@
 !sublime.cmd
 !setenlistenv.bat
 !ConEmu.xml
+
+# Git
+!.gitconfig
