@@ -50,8 +50,8 @@ DOSKEY sandbox=cd /d C:\Users\jonchan\sandbox
 call C:\Users\jonchan\setenlistenv.bat
 
 REM Useful SD commands
-DOSKEY objrt=cd /d D:\win\$1.obj\$1.$2\analog
-DOSKEY binrt=cd /d D:\win\$1.bin\$1.$2\Analog\bin
+DOSKEY objrt=cd /d $3:\win\$1.obj\$1.$2\analog
+DOSKEY binrt=cd /d $3:\win\$1.bin\$1.$2\Analog\bin
 SET BINRT=D:\win\rs.bin\rs.amd64fre\Analog\bin
 
 DOSKEY runR2dTests=D:\win\fbl_analog\tools\amd64\Te.exe D:\win\fbl_analog.binaries.amd64chk\Analog\bin\Input\RawToDepth\depth.unittests.dll /name:*R2dP0* /inproc
