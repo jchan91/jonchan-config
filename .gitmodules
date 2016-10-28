@@ -1,0 +1,9 @@
+[submodule ".emacs.d/function-args"]
+	path = .emacs.d/function-args
+	url = https://github.com/abo-abo/function-args
+[submodule ".emacs.d/helm"]
+	path = .emacs.d/helm
+	url = https://github.com/emacs-helm/helm.git
+[submodule ".emacs.d/emacs-async"]
+	path = .emacs.d/emacs-async
+	url = https://github.com/jwiegley/emacs-async.git

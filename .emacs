@@ -168,6 +168,10 @@
 ;;;; General Helm config
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; If async is installed
+(add-to-list 'load-path "~/.emacs.d/emacs-async")
+(add-to-list 'load-path "~/.emacs.d/helm")
+
 (require 'helm)
 (require 'helm-config)
 (helm-mode 1)
@@ -238,6 +242,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; function-args
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/function-args")
 (require 'function-args)
 (fa-config-default)
 (define-key c-mode-map  [(control tab)] 'moo-complete)

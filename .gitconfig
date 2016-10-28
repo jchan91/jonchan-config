@@ -18,3 +18,6 @@
 	default = upstream
 [merge]
 	tool = meld
+[user]
+	email = jon.chan.1@outlook.com
+	name = Jonathan Chan
