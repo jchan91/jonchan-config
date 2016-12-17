@@ -18,7 +18,7 @@ SET PATH=%PATH%;C:\Program Files\doxygen\bin
 
 REM Python stuff
 SET PYTHON27_PATH=C:\Python27
-SET PYTHON35_PATH=C:\Users\jonchan\AppData\Local\Programs\Python\Python35
+SET PYTHON35_PATH=C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python35
 SET PYTHON35_SCRIPTS=%PYTHON35_PATH%\Scripts
 SET PATH=%PATH%;%PYTHON35_PATH%;%PYTHON35_SCRIPTS%
 SET PYTHONPATH=%PYTHONPATH%;E:\aea\scripts\python
@@ -30,12 +30,12 @@ DOSKEY gitlog=git log --pretty=format:"%C(yellow)%h%Cred%d%Creset - %C(cyan)%an 
 DOSKEY npp=notepad++.exe $1
 DOSKEY sublime=start sublime_text.exe -n $*
 DOSKEY emacs=start emacs $1 $2 
-DOSKEY editprofile=sublime_text.exe -n C:\Users\jonchan\AppData\Roaming\profile.cmd
-DOSKEY sourceprofile=call C:\Users\jonchan\AppData\Roaming\profile.cmd
+DOSKEY editprofile=sublime_text.exe -n C:\Users\%USERNAME%\AppData\Roaming\profile.cmd
+DOSKEY sourceprofile=call C:\Users\%USERNAME%\AppData\Roaming\profile.cmd
 DOSKEY rmdir=rmdir /q/s $*
 DOSKEY clipp=echo|set /p=%CD%|clip
 DOSKEY less=less -i $*
-DOSKEY home=cd /d C:\users\jonchan\AppData\Roaming\
+DOSKEY home=cd /d C:\users\%USERNAME%\AppData\Roaming\
 DOSKEY rcopy=robocopy /E /R:0 $*
 
 REM Spline tools
@@ -50,8 +50,8 @@ DOSKEY hydro=call C:\opt\ros\hydro\x86\setup.bat
 DOSKEY fuerte=call C:\opt\ros\fuerte\x86\env.bat
 
 REM Useful G2D Utility commands
-DOSKEY sandbox=cd /d C:\Users\jonchan\sandbox
-call C:\Users\jonchan\AppData\Roaming\setenlistenv.bat
+DOSKEY sandbox=cd /d C:\Users\%USERNAME%\sandbox
+call C:\Users\%USERNAME%\AppData\Roaming\setenlistenv.bat
 
 REM Useful SD commands
 DOSKEY objrt=cd /d $3:\win\$1.obj\$1.$2\analog
