@@ -15,3 +15,4 @@ DOSKEY hs=cd /d E:\win\"%_MY_ENLISTMENT%"\analog\SDK\HStudio
 DOSKEY calib=cd /d E:\win\"%_MY_ENLISTMENT%"\analog\calibration
 DOSKEY sr=cd /d E:\win\"%_MY_ENLISTMENT%"\analog\Input\SurfaceRecon
 DOSKEY aea=cd /d E:\win\"%_MY_ENLISTMENT%"\analog\GroundTruth\AEA\src
+DOSKEY charon=cd /d E:\win\"%_MY_ENLISTMENT%"\analog\Input\Common\Test\GroundTruth\Charon

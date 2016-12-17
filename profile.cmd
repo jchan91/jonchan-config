@@ -6,13 +6,15 @@ REM Setting Common PATH variables
 SET PATH=%PATH%;C:\Users\jonchan\pkgs\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Notepad++
 SET PATH=%PATH%;C:\Program Files\Sublime Text 3
-SET PATH=%PATH%;C:\Program Files (x86)\Git\bin
+SET PATH=%PATH%;C:\Program Files\Git\bin
+SET PATH=%PATH%;C:\Program Files\Git\usr\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin
 SET CMAKE_PATH=c:/Program Files (x86)/CMake/bin
 SET PATH=%PATH%;%CMAKE_PATH%
 SET PATH=%PATH%;C:\build\boost_1_57_0\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Meld
+SET PATH=%PATH%;C:\Program Files\doxygen\bin
 
 REM Python stuff
 SET PYTHON27_PATH=C:\Python27
@@ -33,6 +35,8 @@ DOSKEY sourceprofile=call C:\Users\jonchan\AppData\Roaming\profile.cmd
 DOSKEY rmdir=rmdir /q/s $*
 DOSKEY clipp=echo|set /p=%CD%|clip
 DOSKEY less=less -i $*
+DOSKEY home=cd /d C:\users\jonchan\AppData\Roaming\
+DOSKEY rcopy=robocopy /E /R:0 $*
 
 REM Spline tools
 DOSKEY plots=start python E:\aea\scripts\python\plot_spline.py -i $*
@@ -47,11 +51,12 @@ DOSKEY fuerte=call C:\opt\ros\fuerte\x86\env.bat
 
 REM Useful G2D Utility commands
 DOSKEY sandbox=cd /d C:\Users\jonchan\sandbox
-call C:\Users\jonchan\setenlistenv.bat
+call C:\Users\jonchan\AppData\Roaming\setenlistenv.bat
 
 REM Useful SD commands
 DOSKEY objrt=cd /d $3:\win\$1.obj\$1.$2\analog
 DOSKEY binrt=cd /d $3:\win\$1.bin\$1.$2\Analog\bin
+DOSKEY tstrt=cd /d $3:\win\$1.bin\$1.$2\test_automation_bins\Analog\bin
 SET BINRT=D:\win\rs.bin\rs.amd64fre\Analog\bin
 
 DOSKEY runR2dTests=D:\win\fbl_analog\tools\amd64\Te.exe D:\win\fbl_analog.binaries.amd64chk\Analog\bin\Input\RawToDepth\depth.unittests.dll /name:*R2dP0* /inproc
