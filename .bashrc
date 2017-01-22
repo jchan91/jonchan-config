@@ -203,3 +203,6 @@ fi
 # 
 # alias cd=cd_func
 
+
+# added by Anaconda3 4.2.0 installer
+export PATH="~/anaconda3/bin:$PATH"

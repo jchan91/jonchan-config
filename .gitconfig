@@ -9,7 +9,7 @@
 	au = add -u :/
 [core]
 	editor = emacs -nw
-	autocrlf = true
+	autocrlf = false
 [diff]
 	tool = meld
 [difftool]

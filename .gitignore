@@ -7,6 +7,9 @@
 !.emacs.d/**
 !.emacs
 .emacs.d/elpa
+.emacs.d/helm
+.emacs.d/emacs-async
+.emacs.d/semantic.db
 
 # Bash profiles
 !.bashrc
