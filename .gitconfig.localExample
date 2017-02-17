@@ -1,0 +1,6 @@
+[credential]
+	helper = !'C:\\Users\\jonchan\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
+[http]
+	sslCAinfo = C:\\Users\\jonchan\\GitCred\\curl-ca-bundle.crt
+[include]
+	path = C:\\Users\\jonchan\\AppData\\Roaming\\.gitconfig
