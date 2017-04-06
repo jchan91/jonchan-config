@@ -15,14 +15,16 @@ SET PATH=%PATH%;%CMAKE_PATH%
 SET PATH=%PATH%;C:\build\boost_1_57_0\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Meld
 SET PATH=%PATH%;C:\Program Files\doxygen\bin
+SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
+SET PATH=%PATH%;C:\Program Files\KDiff3
 
 REM Python stuff
-SET PYTHON27_PATH=C:\Python27
-SET PYTHON35_PATH=C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python35
-SET PYTHON35_SCRIPTS=%PYTHON35_PATH%\Scripts
-SET PATH=%PATH%;%PYTHON35_PATH%;%PYTHON35_SCRIPTS%
-SET PYTHONPATH=%PYTHONPATH%;E:\aea\scripts\python
-DOSKEY python27=%PYTHON27_PATH%\python.exe $*
+REM SET PYTHON27_PATH=C:\Python27
+REM SET PYTHON35_PATH=C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python35
+REM SET PYTHON35_SCRIPTS=%PYTHON35_PATH%\Scripts
+REM SET PATH=%PATH%;%PYTHON35_PATH%;%PYTHON35_SCRIPTS%
+REM SET PYTHONPATH=%PYTHONPATH%;E:\aea\scripts\python
+REM DOSKEY python27=%PYTHON27_PATH%\python.exe $*
 SET PATH=%PATH%;E:\Anaconda3-4.1.1-Windows-x86_64\Scripts
 
 REM Useful utility commands
@@ -50,17 +52,11 @@ REM ROS stuff
 DOSKEY hydro=call C:\opt\ros\hydro\x86\setup.bat
 DOSKEY fuerte=call C:\opt\ros\fuerte\x86\env.bat
 
-REM Useful G2D Utility commands
-DOSKEY sandbox=cd /d C:\Users\%USERNAME%\sandbox
-call C:\Users\%USERNAME%\AppData\Roaming\setenlistenv.bat
-
 REM Useful SD commands
 DOSKEY objrt=cd /d $3:\win\$1.obj\$1.$2\analog
 DOSKEY binrt=cd /d $3:\win\$1.bin\$1.$2\Analog\bin
 DOSKEY tstrt=cd /d $3:\win\$1.bin\$1.$2\test_automation_bins\Analog\bin
-SET BINRT=D:\win\rs.bin\rs.amd64fre\Analog\bin
-
-DOSKEY runR2dTests=D:\win\fbl_analog\tools\amd64\Te.exe D:\win\fbl_analog.binaries.amd64chk\Analog\bin\Input\RawToDepth\depth.unittests.dll /name:*R2dP0* /inproc
+DOSKEY sdb=E:\tools\sdb\sdb.exe $*
 
 REM Mount common network drives
 if NOT exist Z: net use Z: \\analogfs\private\analogplat\users\jonchan
@@ -68,4 +64,4 @@ if NOT exist Y: net use Y: \\analogfs\private\AnalogPlat\analogsyndata
 if NOT exist X: net use X: \\analogfs\private\AnalogPlat
 
 REM Alias for running source depot razzle
-DOSKEY razzle=\\analogfs\private\analogplat\users\jonchan\sd\razzle.cmd $1 $2 $3 ^& call C:\users\jonchan\setenlistenv.bat
+DOSKEY razzle=\\analogfs\private\analogplat\users\jonchan\sd\razzle.cmd $1 $2 $3
