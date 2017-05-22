@@ -64,4 +64,4 @@ if NOT exist Y: net use Y: \\analogfs\private\AnalogPlat\analogsyndata
 if NOT exist X: net use X: \\analogfs\private\AnalogPlat
 
 REM Alias for running source depot razzle
-DOSKEY razzle=\\analogfs\private\analogplat\users\jonchan\sd\razzle.cmd $1 $2 $3
+DOSKEY razzle=%APPDATA%\razzle.cmd $*
