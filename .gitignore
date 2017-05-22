@@ -10,6 +10,8 @@
 .emacs.d/helm
 .emacs.d/emacs-async
 .emacs.d/semantic.db
+.emacs.d/semanticdb
+.emacs.d/tramp
 
 # Bash profiles
 !.bashrc
