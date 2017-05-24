@@ -8,17 +8,28 @@
 	f = fetch --all
 	c = commit
 	au = add -u :/
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = true
 [core]
 	editor = sublime_text.exe -n -w
 	autocrlf = false
+	symlinks = false
+	fscache = true
 [diff]
 	tool = meld
-[difftool]
-	prompt = false
-[push]
-	default = upstream
+[diff "astextplain"]
+	textconv = astextplain
+[help]
+	format = html
 [merge]
 	tool = meld
+[push]
+	default = upstream
+[sendemail]
+	smtpserver = /bin/msmtp.exe
 [user]
 	email = jchchan91@gmail.com
 	name = Jonathan Chan
