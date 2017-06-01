@@ -59,7 +59,7 @@ DOSKEY tstrt=cd /d $3:\win\$1.bin\$1.$2\test_automation_bins\Analog\bin
 DOSKEY sdb=E:\tools\sdb\sdb.exe $*
 
 REM Mount common network drives
-if NOT exist Z: net use Z: \\analogfs\private\analogplat\users\jonchan
+if NOT exist Z: net use Z: \\analogfs\private\Scratch\JONCHAN
 if NOT exist Y: net use Y: \\analogfs\private\AnalogPlat\analogsyndata
 if NOT exist X: net use X: \\analogfs\private\AnalogPlat
 
