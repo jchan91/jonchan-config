@@ -17,6 +17,7 @@ SET PATH=%PATH%;C:\Program Files (x86)\Meld
 SET PATH=%PATH%;C:\Program Files\doxygen\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
 SET PATH=%PATH%;C:\Program Files\KDiff3
+SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 
 REM Python stuff
 REM SET PYTHON27_PATH=C:\Python27
