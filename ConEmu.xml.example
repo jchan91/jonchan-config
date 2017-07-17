@@ -571,7 +571,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
@@ -580,7 +580,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
@@ -607,8 +607,8 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; &quot;%windir%\system32\cmd.exe&quot; /k ver &amp; echo This is Native cmd.exe"/>
-					<value name="Cmd2" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; &quot;%windir%\syswow64\cmd.exe&quot; /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; &quot;%windir%\system32\cmd.exe&quot; /k ver &amp; echo This is Native cmd.exe"/>
+					<value name="Cmd2" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; &quot;%windir%\syswow64\cmd.exe&quot; /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000002"/>
 				</key>
@@ -671,7 +671,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 					<value name="Cmd2" type="string" data="-new_console:d:D:\"/>
@@ -682,7 +682,7 @@
 					<value name="Flags" type="dword" data="00000001"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:C:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:C:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 					<value name="Cmd2" type="string" data="set PROMPT=$_$E[0m[$E[33m$P$E[0m]$S &amp; cmd.exe"/>
@@ -692,7 +692,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[0:31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:C:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:C:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
