@@ -15,7 +15,7 @@
 	interactive = true
 [core]
 	editor = sublime_text.exe -n -w
-	autocrlf = false
+	autocrlf = true
 	symlinks = false
 	fscache = true
 [diff]
