@@ -10,8 +10,6 @@ SET PATH=%PATH%;C:\Program Files\Git\bin
 SET PATH=%PATH%;C:\Program Files\Git\usr\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin
-SET CMAKE_PATH=c:/Program Files (x86)/CMake/bin
-SET PATH=%PATH%;%CMAKE_PATH%
 SET PATH=%PATH%;C:\build\boost_1_57_0\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Meld
 SET PATH=%PATH%;C:\Program Files\doxygen\bin
@@ -66,3 +64,6 @@ if NOT exist X: net use X: \\analogfs\private\AnalogPlat
 
 REM Alias for running source depot razzle
 DOSKEY razzle=%APPDATA%\razzle.cmd $*
+
+REM Arnold
+set solidangle_LICENSE=49000@rlmarnold.cloudapp.net
