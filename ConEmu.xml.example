@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2017-01-09 11:59:14" build="150319">
+		<key name=".Vanilla" modified="2017-10-13 22:31:18" build="161206">
 			<value name="SingleInstance" type="hex" data="00"/>
 			<value name="KeyboardHooks" type="hex" data="01"/>
 			<value name="UseInjects" type="hex" data="01"/>
@@ -16,13 +16,13 @@
 			<value name="TabFontHeight" type="dword" data="00000010"/>
 			<value name="UseCurrentSizePos" type="hex" data="01"/>
 			<value name="WindowMode" type="dword" data="0000051f"/>
-			<value name="ConWnd Width" type="dword" data="00000086"/>
-			<value name="ConWnd Height" type="dword" data="0000002e"/>
+			<value name="ConWnd Width" type="dword" data="0000006d"/>
+			<value name="ConWnd Height" type="dword" data="0000002d"/>
 			<value name="Cascaded" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
-			<value name="ConWnd X" type="dword" data="00000779"/>
-			<value name="ConWnd Y" type="dword" data="000002bb"/>
-			<value name="16bit Height" type="dword" data="00000000"/>
+			<value name="ConWnd X" type="long" data="933"/>
+			<value name="ConWnd Y" type="long" data="193"/>
+			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -108,14 +108,14 @@
 			<value name="StoreTaskbarCommands" type="hex" data="00"/>
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
-				<line data="{myCmdAdmin}"/>
 				<line data="{myCmd}"/>
+				<line data="{myCmdAdmin}"/>
 				<line data="{cmd Razzle}"/>
 				<line data="{Scripts::Chocolatey (Admin)}"/>
 				<line data="{Shells::cmd (Admin) razzle}"/>
 				<line data="{Shells::cmd (Admin)}"/>
 				<line data="{Shells::cmd}"/>
-				<line data="&quot;C:\WINDOWS\SYSTEM32\cmd.exe&quot; &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+				<line data="&quot;C:\WINDOWS\SYSTEM32\cmd.exe&quot; &amp; cmd.exe /k C:\Users\jonch\AppData\Roaming\profile.cmd"/>
 				<line data="{Cygwin::Bash}"/>
 				<line data="{Shells::cmd {Admin} razzle}"/>
 				<line data="{Bash::bash}"/>
@@ -580,7 +580,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a /k C:\Users\jonch\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
@@ -671,18 +671,18 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k C:\Users\jonch\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 					<value name="Cmd2" type="string" data="-new_console:d:D:\"/>
-					<value name="Cmd3" type="string" data="C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd3" type="string" data="C:\Users\jonch\AppData\Roaming\profile.cmd"/>
 				</key>
 				<key name="Task13" modified="2016-10-21 11:12:01" build="150319">
 					<value name="Name" type="string" data="{myCmd}"/>
 					<value name="Flags" type="dword" data="00000001"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:C:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:C:\ &amp; cmd.exe /k C:\Users\jonch\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 					<value name="Cmd2" type="string" data="set PROMPT=$_$E[0m[$E[33m$P$E[0m]$S &amp; cmd.exe"/>
@@ -692,7 +692,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:C:\ &amp; cmd.exe /k C:\Users\jonchan\AppData\Roaming\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:C:\ &amp; cmd.exe /k C:\Users\jonch\AppData\Roaming\profile.cmd"/>
 					<value name="Active" type="dword" data="00000000"/>
 					<value name="Count" type="dword" data="00000001"/>
 				</key>
@@ -703,6 +703,7 @@
 			<key name="Colors" modified="2016-10-21 11:12:01" build="150319">
 				<value name="Count" type="dword" data="00000000"/>
 			</key>
+			<value name="LastMonitor" type="string" data="0,0,1920,1040"/>
 		</key>
 	</key>
 </key>
