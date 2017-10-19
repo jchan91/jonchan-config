@@ -44,9 +44,9 @@ REM Add MSVC variables to run stuff like cl.exe from Command Line
 REM call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 
 REM Useful SD commands
-DOSKEY objrt=cd /d $J:\os\src.obj.$1\analog
-DOSKEY binrt=cd /d $J:\os\src.binanires.$1\Analog\bin
-DOSKEY tstrt=cd /d $J:\os\src.binanires.$1\test_automation_bins\Analog\bin
+DOSKEY objrt=cd /d J:\os\src.obj.$1\analog
+DOSKEY binrt=cd /d J:\os\src.binaries.$1\Analog\bin
+DOSKEY tstrt=cd /d J:\os\src.binaries.$1\test_automation_bins\Analog\bin
 DOSKEY sdb=E:\tools\sdb\sdb.exe $*
 
 REM Mount common network drives
