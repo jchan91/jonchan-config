@@ -7,6 +7,7 @@
     ch = checkout
     f = fetch --all --prune --tags
     c = commit
+    cne = commit --amend --no-edit
     au = add -u :/
 [color]
     diff = auto
