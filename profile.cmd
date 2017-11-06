@@ -17,6 +17,7 @@ SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
 SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;%USERPROFILE%\.nuget\packages\nuget.commandline\3.5.0\tools\
+SET PATH=%PATH%;E:\tools\Strings
 
 REM Python stuff
 REM SET PYTHON27_PATH=C:\Python27
@@ -48,9 +49,9 @@ REM Add MSVC variables to run stuff like cl.exe from Command Line
 REM call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 
 REM Useful SD commands
-DOSKEY objrt=cd /d $3:\win\$1.obj\$1.$2\analog
-DOSKEY binrt=cd /d $3:\win\$1.bin\$1.$2\Analog\bin
-DOSKEY tstrt=cd /d $3:\win\$1.bin\$1.$2\test_automation_bins\Analog\bin
+DOSKEY objrt=cd /d J:\os\src.obj.$1\analog
+DOSKEY binrt=cd /d J:\os\src.binaries.$1\Analog\bin
+DOSKEY tstrt=cd /d J:\os\src.binaries.$1\test_automation_bins\Analog\bin
 DOSKEY sdb=E:\tools\sdb\sdb.exe $*
 
 REM Mount common network drives
