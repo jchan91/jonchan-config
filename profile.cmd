@@ -26,7 +26,11 @@ REM SET PATH=%PATH%;%PYTHON35_PATH%;%PYTHON35_SCRIPTS%
 REM SET PYTHONPATH=%PYTHONPATH%;E:\aea\scripts\python
 REM DOSKEY python27=%PYTHON27_PATH%\python.exe $*
 REM SET PATH=%PATH%;E:\Anaconda3-4.1.1-Windows-x86_64;E:\Anaconda3-4.1.1-Windows-x86_64\Scripts
-SET PATH=%PATH%;C:\ProgramData\Anaconda3;C:\ProgramData\Anaconda3\Scripts
+rem SET PYTHONPATH=C:\ProgramData\Anaconda3;C:\ProgramData\Anaconda3\Scripts
+SET CONDA_PATH=C:\ProgramData\Anaconda3\Scripts
+SET PATH=%PATH%;%CONDA_PATH%
+rem SET PATH=%PATH%;%PYTHONPATH%
+DOSKEY ipython=python -m IPython
 
 REM Useful utility commands
 DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
