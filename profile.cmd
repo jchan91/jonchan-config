@@ -18,6 +18,7 @@ SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;%USERPROFILE%\.nuget\packages\nuget.commandline\3.5.0\tools\
 SET PATH=%PATH%;C:\tools\Strings
+SET PATH=%PATH%;C:\ProgramData\chocolatey\bin
 
 REM Python stuff
 REM SET PYTHON27_PATH=C:\Python27
@@ -34,7 +35,8 @@ rem SET PATH=%PATH%;%PYTHONPATH%
 DOSKEY ipython=python -m IPython
 
 REM Useful utility commands
-DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
+REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
+DOSKEY grep=grep --color -n $*
 DOSKEY sublime=start sublime_text.exe -n $*
 DOSKEY emacs=start emacs $*
 DOSKEY editprofile=sublime_text.exe -n %APPDATA%\profile.cmd
@@ -49,9 +51,9 @@ REM Add MSVC variables to run stuff like cl.exe from Command Line
 REM call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
 
 REM Useful SD commands
-DOSKEY objrt=cd /d G:\os\src.obj.$1\analog
-DOSKEY binrt=cd /d G:\os\src.binaries.$1\Analog\bin
-DOSKEY tstrt=cd /d G:\os\src.binaries.$1\test_automation_bins\Analog\bin
+DOSKEY objrt=cd /d G:\os\obj\$1\analog
+DOSKEY binrt=cd /d G:\os\bin\$1\Analog\bin
+DOSKEY tstrt=cd /d G:\os\bin\$1\test_automation_bins\Analog\bin
 DOSKEY sdb=E:\tools\sdb\sdb.exe $*
 
 REM Mount common network drives
