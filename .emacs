@@ -204,6 +204,9 @@
 ; Let helm auto-resize its window for itself
 (helm-autoresize-mode nil)
 
+; Increase helm-buffer-max-length
+(setq helm-buffer-max-length 45)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Company mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -242,7 +245,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; function-args
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/function-args")
 (require 'function-args)
 (fa-config-default)
 (define-key c-mode-map  [(control tab)] 'moo-complete)

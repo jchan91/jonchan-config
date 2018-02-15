@@ -23,6 +23,8 @@
                          'fzf
                          'flycheck
                          'auto-complete
+                         'helm-ag
+                         'powershell
                          ))
 
 (defun ensure-package-installed (packages)
