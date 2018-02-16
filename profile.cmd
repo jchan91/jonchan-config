@@ -19,6 +19,7 @@ SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;%USERPROFILE%\.nuget\packages\nuget.commandline\3.5.0\tools\
 SET PATH=%PATH%;C:\tools\Strings
 SET PATH=%PATH%;C:\ProgramData\chocolatey\bin
+SET PATH=%PATH%;C:\tools\texinfo-4.13a-w32-bin\bin
 
 REM Python stuff
 REM SET PYTHON27_PATH=C:\Python27

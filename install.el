@@ -13,13 +13,13 @@
 (package-initialize)
 
 (setq packagesToInstall (list
-                         'helm
+;                         'helm
                          'vlf
                          'company
                          'cc-mode
                          'semantic
-                         'function-args
-                         'iedit
+;                         'function-args
+;                         'iedit
                          'fzf
                          'flycheck
                          'auto-complete
