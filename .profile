@@ -12,3 +12,4 @@ if [ -f "${HOME}/.bash_aliases" ]; then
 fi
 
 alias emacs="/usr/local/Cellar/emacs/25.3/Emacs.app/Contents/MacOS/Emacs -nw"
+alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"

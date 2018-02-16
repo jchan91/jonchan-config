@@ -15,7 +15,7 @@
     branch = auto
     interactive = true
 [core]
-    editor = sublime_text.exe -n -w
+    editor = emacs -nw
     autocrlf = true
     fscache = true
 [diff]
