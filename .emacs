@@ -127,8 +127,8 @@
  '(ede-project-directories (quote ("/home/analog/sandbox/src/hello/app")))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-        (quote
-         (helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
+   (quote
+    (company-jedi anaconda-mode visual-regexp-steroids visual-regexp yasnippet helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
  '(vlf-application (quote dont-ask)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -314,6 +314,11 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;; helm-swoop
+;;;;; Others
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load-file "~/.emacs.d/helm-swoop.el")
+(load-file "~/.emacs.d/yasnippet.el")
+(load-file "~/.emacs.d/visual-regexp.el")
+;; (load-file "~/.emacs.d/visual-regexp-steroids.el")
+(load-file "~/.emacs.d/anaconda-mode.el")
+

@@ -26,6 +26,11 @@
                          'helm-ag
                          'powershell
                          'helm-swoop
+                         'yasnippet
+                         'visual-regexp
+                         'visual-regexp-steroids
+                         'anaconda-mode
+                         'company-jedi
                          ))
 
 (defun ensure-package-installed (packages)
