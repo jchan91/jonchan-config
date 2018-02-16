@@ -126,6 +126,9 @@
  ;; If there is more than one, they won't work right.
  '(ede-project-directories (quote ("/home/analog/sandbox/src/hello/app")))
  '(inhibit-startup-screen t)
+ '(package-selected-packages
+        (quote
+         (helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
  '(vlf-application (quote dont-ask)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -301,3 +304,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; Windmove
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; helm-swoop
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/helm-swoop.el")

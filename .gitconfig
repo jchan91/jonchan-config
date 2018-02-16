@@ -17,7 +17,6 @@
 [core]
     editor = sublime_text.exe -n -w
     autocrlf = true
-    symlinks = false
     fscache = true
 [diff]
     tool = meld

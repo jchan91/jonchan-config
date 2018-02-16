@@ -25,6 +25,7 @@
                          'auto-complete
                          'helm-ag
                          'powershell
+                         'helm-swoop
                          ))
 
 (defun ensure-package-installed (packages)
