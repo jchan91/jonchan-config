@@ -31,6 +31,7 @@
                          'visual-regexp-steroids
                          'anaconda-mode
                          'company-jedi
+                         'csharp-mode
                          ))
 
 (defun ensure-package-installed (packages)
