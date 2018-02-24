@@ -94,6 +94,9 @@
   (setq indent-line-function 'insert-tab)
   (setq tab-always-indent nil) ))
 
+;; Automatically revert all buffers on filesystem file changes
+(global-auto-revert-mode 1)
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; package
