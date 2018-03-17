@@ -12,6 +12,14 @@
 # settings that generally should always be used with your language specific settings
 ###############################################################################
 
+# Profile
+# ============
+.profile eol=lf
+.bashrc eol=lf
+.bash_custom eol=lf
+.bash_aliases eol=lf
+.bash_history eol=lf
+
 # Documents
 # ============
 *.doc     diff=astextplain
