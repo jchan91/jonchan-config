@@ -206,3 +206,5 @@ fi
 
 # added by Anaconda3 4.2.0 installer
 export PATH="~/anaconda3/bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
