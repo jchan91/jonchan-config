@@ -12,6 +12,7 @@
 .emacs.d/semantic.db
 .emacs.d/semanticdb
 .emacs.d/tramp
+.emacs.d/network-security.data
 
 # Bash profiles
 !.bashrc
