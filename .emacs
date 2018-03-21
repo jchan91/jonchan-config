@@ -128,7 +128,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (csharp-mode company-jedi anaconda-mode visual-regexp-steroids visual-regexp yasnippet helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
+    (xclip csharp-mode company-jedi anaconda-mode visual-regexp-steroids visual-regexp yasnippet helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
  '(vlf-application (quote dont-ask)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

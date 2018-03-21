@@ -13,6 +13,6 @@ then
   source "${HOME}/.bash_aliases"
 fi
 
-alias emacs="/usr/local/Cellar/emacs/25.3/Emacs.app/Contents/MacOS/Emacs -nw"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs -nw"
 alias sublime="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 
