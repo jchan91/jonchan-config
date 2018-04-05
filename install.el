@@ -32,6 +32,7 @@
                          'anaconda-mode
                          'company-jedi
                          'csharp-mode
+                         'swift3-mode
                          ))
 
 (defun ensure-package-installed (packages)
