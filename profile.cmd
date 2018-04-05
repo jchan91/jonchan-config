@@ -10,7 +10,7 @@ SET PATH=%PATH%;C:\Program Files\Sublime Text 3
 SET PATH=%PATH%;C:\Program Files\Git\bin
 SET PATH=%PATH%;C:\Program Files\Git\usr\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
-SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin
+SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.12.25827\bin\Hostx86\x86
 SET PATH=%PATH%;C:\Program Files (x86)\Meld
 SET PATH=%PATH%;C:\Program Files\doxygen\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
@@ -45,6 +45,9 @@ DOSKEY clipp=echo|set /p=%CD%|clip
 DOSKEY less=less -i $*
 DOSKEY home=cd /d C:\users\%USERNAME%\AppData\Roaming\
 DOSKEY rcopy=robocopy /E /R:0 $*
+DOSKEY emacs=start emacsclient -t $*
+DOSKEY fzf=fzf --print0 $* ^| clip
+DOSKEY tree=tree /A $* ^| less -i
 
 REM Add MSVC variables to run stuff like cl.exe from Command Line
 REM call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
@@ -58,7 +61,7 @@ DOSKEY sdb=E:\tools\sdb\sdb.exe $*
 REM Mount common network drives
 if %COMPUTERNAME%==JONCHAN-DESKTOP (
 	if NOT exist Z: net use Z: \\analogfs\private\Scratch\JONCHAN
-	if NOT exist Y: net use Y: \\analogfs\private\AnalogPlat\analogsyndata
+	if NOT exist Y: net use Y: \\analogfs\PRIVATE\Science\ReposeData\ReposeDataServerV1\Datasets
 	if NOT exist X: net use X: \\analogfs\private\AnalogPlat
 )
 

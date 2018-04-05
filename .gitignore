@@ -1,6 +1,9 @@
 # Ignore everything except my config files
 *
-!.gitignore
+
+# General config
+!config
+!config/**
 
 # Emacs files
 !.emacs.d
@@ -13,6 +16,7 @@
 .emacs.d/semanticdb
 .emacs.d/tramp
 .emacs.d/network-security.data
+.emacs.d/server/server
 
 # Bash profiles
 !.bashrc
@@ -36,6 +40,7 @@
 
 # Git
 !.gitconfig
+!.gitignore
 
 # ConEmu (ignore the actual ConEmu.xml. Just check in the example)
 !ConEmu.xml.example\

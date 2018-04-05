@@ -39,6 +39,10 @@
 ; Set default major mode to text-mode
 (setq-default major-mode 'text-mode)
 
+;; Set default window size
+(add-to-list 'default-frame-alist '(height . 50))
+(add-to-list 'default-frame-alist '(width . 130))
+
 ; Disable tool-bar in GUI mode
 (tool-bar-mode -1)
 
@@ -131,7 +135,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (csharp-mode company-jedi anaconda-mode visual-regexp-steroids visual-regexp yasnippet helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
+    (swift3-mode swift-mode csharp-mode company-jedi anaconda-mode visual-regexp-steroids visual-regexp yasnippet helm-swoop vlf powershell iedit helm-ag fzf function-args flycheck company auto-complete)))
  '(vlf-application (quote dont-ask)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
