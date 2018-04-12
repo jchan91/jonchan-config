@@ -16,7 +16,7 @@
     interactive = true
 [core]
     editor = emacs -nw
-    autocrlf = true
+    autocrlf = false
     fscache = true
 [diff]
     tool = meld
