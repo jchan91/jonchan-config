@@ -19,6 +19,7 @@ SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;%USERPROFILE%\.nuget\packages\nuget.commandline\3.5.0\tools\
 SET PATH=%PATH%;C:\tools\Strings
 SET PATH=%PATH%;C:\ProgramData\chocolatey\bin
+SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319\
 
 REM Python stuff
 REM SET PYTHON27_PATH=C:\Python27
@@ -48,6 +49,7 @@ DOSKEY rcopy=robocopy /E /R:0 $*
 DOSKEY emacs=start emacsclient -t $*
 DOSKEY fzf=fzf --print0 $* ^| clip
 DOSKEY tree=tree /A $* ^| less -i
+DOSKEY find=C:\tools\GnuWin32\bin\find.exe $*
 
 REM Add MSVC variables to run stuff like cl.exe from Command Line
 REM call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
