@@ -4,22 +4,28 @@ echo "Loading profile.cmd"
 
 color 0b
 
-REM Setting Common PATH variables
-SET PATH=%PATH%;C:\Users\%USERNAME%\pkgs\bin
-SET PATH=%PATH%;C:\Program Files\Sublime Text 3
-SET PATH=%PATH%;C:\Program Files\Git\bin
-SET PATH=%PATH%;C:\Program Files\Git\usr\bin
-SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
-SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.12.25827\bin\Hostx86\x86
-SET PATH=%PATH%;C:\Program Files (x86)\Meld
+REM Setting PATH
+
+REM Misc
 SET PATH=%PATH%;C:\Program Files\doxygen\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
 SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;%USERPROFILE%\.nuget\packages\nuget.commandline\3.5.0\tools\
 SET PATH=%PATH%;C:\tools\Strings
+
+REM General packaging
 SET PATH=%PATH%;C:\ProgramData\chocolatey\bin
-SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319\
+SET PATH=%PATH%;C:\Users\%USERNAME%\pkgs\bin
+
+REM Git
+SET PATH=%PATH%;C:\Program Files\Git\bin
+SET PATH=%PATH%;C:\Program Files\Git\usr\bin
+SET PATH=%PATH%;C:\Program Files (x86)\Meld
+
+REM Editors
+SET PATH=%PATH%;C:\Program Files\Microsoft VS Code\
+SET PATH=%PATH%;C:\Program Files\Sublime Text 3\
 
 REM Python stuff
 REM SET PYTHON27_PATH=C:\Python27
@@ -72,3 +78,12 @@ DOSKEY razzle=%APPDATA%\razzle.cmd $*
 
 REM Arnold
 set solidangle_LICENSE=49000@rlmarnold.cloudapp.net
+
+REM MSVC Tools
+REM SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319\
+REM SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.13.26128\bin\Hostx86\x86\
+REM SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
+REM SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.12.25827\bin\Hostx86\x86
+
+REM Setup VS env variables. ***Must be called last***
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
