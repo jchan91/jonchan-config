@@ -45,7 +45,7 @@ REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY grep=grep --color -n $*
 DOSKEY sublime=start sublime_text.exe -n $*
-DOSKEY editprofile=sublime_text.exe -n %APPDATA%\profile.cmd
+DOSKEY editprofile=code %APPDATA%\profile.cmd
 DOSKEY sourceprofile=call %APPDATA%\profile.cmd
 DOSKEY rmdir=rmdir /q/s $*
 DOSKEY clipp=echo|set /p=%CD%|clip
