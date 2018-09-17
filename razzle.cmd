@@ -13,6 +13,5 @@ REM set _MY_BIN_DIR=%_MY_BIN_ROOT%\%_MY_ENLISTMENT%
 REM set _MY_PUB_DIR=%_MY_PUB_ROOT%\%_MY_ENLISTMENT%
 
 call G:\%_MY_ENLISTMENT%\src\tools\razzle.cmd dev_build %*
-call %scriptDir%\setenlistenv.bat
 
 CD /D %SDXROOT%

@@ -11,7 +11,7 @@ SET PATH=%PATH%;C:\Program Files\doxygen\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
 SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
-SET PATH=%PATH%;%USERPROFILE%\.nuget\packages\nuget.commandline\3.5.0\tools\
+SET PATH=%PATH%;C:\tools\nuget
 SET PATH=%PATH%;C:\tools\Strings
 
 REM General packaging
@@ -24,7 +24,6 @@ SET PATH=%PATH%;C:\Program Files\Git\usr\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Meld
 
 REM Editors
-SET PATH=%PATH%;C:\Program Files\Microsoft VS Code\
 SET PATH=%PATH%;C:\Program Files\Sublime Text 3\
 
 REM Python stuff
@@ -57,33 +56,8 @@ DOSKEY fzf=fzf --print0 $* ^| clip
 DOSKEY tree=tree /A $* ^| less -i
 DOSKEY find=C:\tools\GnuWin32\bin\find.exe $*
 
-REM Add MSVC variables to run stuff like cl.exe from Command Line
-REM call "C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\vcvarsall.bat" x86
-
-REM Useful SD commands
-DOSKEY objrt=cd /d G:\os\obj\$1\analog
-DOSKEY binrt=cd /d G:\os\bin\$1\Analog\bin
-DOSKEY tstrt=cd /d G:\os\bin\$1\test_automation_bins\Analog\bin
-DOSKEY sdb=E:\tools\sdb\sdb.exe $*
-
-REM Mount common network drives
-if %COMPUTERNAME%==JONCHAN-DESKTOP (
-	if NOT exist Z: net use Z: \\analogfs\private\Scratch\JONCHAN
-	if NOT exist Y: net use Y: \\analogfs\PRIVATE\Science\ReposeData\ReposeDataServerV1\Datasets
-	if NOT exist X: net use X: \\analogfs\private\AnalogPlat
-)
-
 REM Alias for running source depot razzle
 DOSKEY razzle=%APPDATA%\razzle.cmd $*
 
-REM Arnold
-set solidangle_LICENSE=49000@rlmarnold.cloudapp.net
-
-REM MSVC Tools
-REM SET PATH=%PATH%;C:\Windows\Microsoft.NET\Framework\v4.0.30319\
-REM SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.13.26128\bin\Hostx86\x86\
-REM SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
-REM SET PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.12.25827\bin\Hostx86\x86
-
 REM Setup VS env variables. ***Must be called last***
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat"
