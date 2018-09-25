@@ -24,6 +24,7 @@ SET PATH=%PATH%;C:\Program Files\Git\usr\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Meld
 
 REM Editors
+REM SET PATH=%PATH%;C:\Program Files\Microsoft VS Code\
 SET PATH=%PATH%;C:\Program Files\Sublime Text 3\
 
 REM Python stuff
@@ -39,6 +40,9 @@ SET CONDA_PATH=C:\ProgramData\Anaconda3\Scripts
 SET PATH=%PATH%;%CONDA_PATH%
 rem SET PATH=%PATH%;%PYTHONPATH%
 DOSKEY ipython=python -m IPython
+
+REM Azure
+SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy
 
 REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
@@ -60,4 +64,11 @@ REM Alias for running source depot razzle
 DOSKEY razzle=%APPDATA%\razzle.cmd $*
 
 REM Setup VS env variables. ***Must be called last***
-"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat"
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat" (
+    echo "Loading VS Community Build bat"
+    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat"
+)
+IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsMSBuildCmd.bat" (
+    echo "Loading VS Enterprise Build bat"
+    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+)
