@@ -1,0 +1,10 @@
+{
+    "workbench.colorTheme": "Monokai",
+    "python.venvPath": "C:/Users/jonch/AppData/Local/conda/conda/envs/tensorflow",
+    "window.zoomLevel": 1,
+    "breadcrumbs.enabled": true,
+    "files.exclude": {
+        "**/.vs": true,
+        "**/packages": true
+    }
+}
