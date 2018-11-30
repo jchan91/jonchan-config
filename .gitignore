@@ -45,3 +45,7 @@
 # ConEmu (ignore the actual ConEmu.xml. Just check in the example)
 !ConEmu.xml.example\
 ConEmu.xml
+
+# Scripts
+!scripts
+!scripts/**
