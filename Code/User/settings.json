@@ -6,5 +6,8 @@
     "files.exclude": {
         "**/.vs": true,
         "**/packages": true
-    }
+    },
+    "explorer.confirmDelete": false,
+    "typescript.tsc.autoDetect": "off",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe"
 }
