@@ -49,6 +49,9 @@ SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy
 REM Android
 SET ANDROID_HOME=C:\Users\jonchan\AppData\Local\Android\Sdk
 
+REM Java
+SET JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
+
 REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY grep=grep --color -n $*
