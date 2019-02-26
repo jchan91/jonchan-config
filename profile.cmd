@@ -2,6 +2,8 @@
 
 echo "Loading profile.cmd"
 
+REM Set command prompt coloring
+REM set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m>$S$E[0m
 color 0b
 
 REM Setting PATH
@@ -44,11 +46,14 @@ DOSKEY ipython=python -m IPython
 REM Azure
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy
 
+REM Android
+SET ANDROID_HOME=C:\Users\jonchan\AppData\Local\Android\Sdk
+
 REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY grep=grep --color -n $*
 DOSKEY sublime=start sublime_text.exe -n $*
-DOSKEY editprofile=code %APPDATA%\profile.cmd
+DOSKEY editprofile=sublime_text.exe -n %APPDATA%\profile.cmd
 DOSKEY sourceprofile=call %APPDATA%\profile.cmd
 DOSKEY rmdir=rmdir /q/s $*
 DOSKEY clipp=echo|set /p=%CD%|clip

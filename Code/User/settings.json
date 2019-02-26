@@ -7,7 +7,9 @@
         "**/.vs": true,
         "**/packages": true
     },
-    "explorer.confirmDelete": false,
     "typescript.tsc.autoDetect": "off",
+    "java.home": "C:\\Program Files\\Java\\jdk1.8.0_201",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe"
 }
