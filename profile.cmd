@@ -48,6 +48,7 @@ SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy
 
 REM Android
 SET ANDROID_HOME=C:\Users\jonchan\AppData\Local\Android\Sdk
+DOSKEY adb=%ANDROID_HOME%\platform-tools\adb.exe $*
 
 REM Java
 SET JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
