@@ -1,12 +1,15 @@
 param(
+    $installGit,
     $matlabScripts,
     $isTest = $true
 )
 
+#####################################
+## Functions
+#####################################
 function Copy-SettingsFile(
     $src,
-    $dst,
-    $isTest
+    $dst
 ) {
     if ($isTest) {
         if (-Not (Test-Path -Path $src)) {
@@ -36,13 +39,54 @@ function Copy-SettingsFile(
     }
 }
 
+
+function Invoke-Cmd(
+    $cmd,
+    $params,
+    $stdOutPath = ""
+) {
+    if ($isTest) {
+        Write-Host "Would run: $cmd $params"
+        return
+    }
+
+    if ($stdOutPath) {
+        & $cmd $params | Out-File -FilePath $stdOutPath -Encoding ASCII
+    }
+    else {
+        & $cmd $params
+    }
+}
+
+
+#####################################
+## Main Logic
+#####################################
 $username = $ENV:USERNAME
 $appDataRoot = $ENV:APPDATA
 
+# Prompot user for inputs
+if (-Not $installGit) {
+    $installGit = Read-Host -Prompt "Install git config? (y/n)"
+}
 if (-Not $matlabScripts) {
-    $matlabScripts = Read-Host -Prompt "Enter MATLAB Scripts Root"
+    $matlabScripts = Read-Host -Prompt "Enter MATLAB Scripts Root (leave empty to skip)"
 }
 
+# Git
+if ($installGit -and ($installGit.ToLower() -eq "y")) {
+    $customGitConfigPath = "$appDataRoot\config\.gitconfig"
+
+    $cmd = "git"
+    $params = @(
+        "config",
+        "--global",
+        "--add", "include.path", $customGitConfigPath
+    )
+    Invoke-Cmd -cmd $cmd -params $params
+}
+
+# Matlab
 if ($matlabScripts) {
     Write-Host "Setting up Matlab"
 
@@ -52,11 +96,10 @@ if ($matlabScripts) {
         mkdir -Force $matlabProfilePath
     }
     Write-Host "$matlabProfilePath\startup.m"
-    Copy-SettingsFile -src "$matlabScripts\startup.m" -dst "$matlabProfilePath\startup.m" -isTest $isTest
+    Copy-SettingsFile -src "$matlabScripts\startup.m" -dst "$matlabProfilePath\startup.m"
 }
 
 # VSCode
 $exampleVsCodeSettingsPath = "$PSScriptRoot\example.vscode.settings.json"
 $dstVsCodeSettingsPath = "$appDataRoot\Code\User\settings.json"
-Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath -isTest $isTest
-Copy-Item -Path $exampleVsCodeSettingsPath -Destination $dstVsCodeSettingsPath
+Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
