@@ -53,6 +53,9 @@ DOSKEY adb=%ANDROID_HOME%\platform-tools\adb.exe $*
 REM Java
 SET JAVA_HOME=C:\Program Files\Java\jdk1.8.0_201
 
+REM CMake
+SET PATH=%PATH%;C:\Program Files\CMake\bin
+
 REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY grep=grep --color -n $*
