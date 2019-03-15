@@ -63,7 +63,8 @@ DOSKEY sublime=start sublime_text.exe -n $*
 DOSKEY editprofile=sublime_text.exe -n %APPDATA%\profile.cmd
 DOSKEY sourceprofile=call %APPDATA%\profile.cmd
 DOSKEY rmdir=rmdir /q/s $*
-DOSKEY clipp=echo|set /p=%CD%|clip
+DOSKEY cd=cd /d $*
+DOSKEY clipp=echo ^| set /p="%%CD%%" ^| clip
 DOSKEY less=less -i $*
 DOSKEY home=cd /d C:\users\%USERNAME%\AppData\Roaming\
 DOSKEY rcopy=robocopy /E /R:0 $*
