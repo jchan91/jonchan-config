@@ -26,6 +26,9 @@
     prompt = false
 [merge]
     tool = meld
+[mergetool "smerge"]
+    cmd = \"C:/Program Files/Sublime Merge/smerge.exe\" \"mergetool\" \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+    trustExitCode = true
 [mergetool "bc4"]
     cmd = \"C:/Program Files/Beyond Compare 4/BCompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
     trustExitCode = true
