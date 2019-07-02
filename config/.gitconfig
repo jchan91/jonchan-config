@@ -9,6 +9,7 @@
     c = commit
     cne = commit --amend --no-edit
     au = add -u :/
+    cp = cherry-pick
 [color]
     diff = auto
     status = auto
