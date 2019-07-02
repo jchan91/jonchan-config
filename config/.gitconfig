@@ -1,5 +1,5 @@
 [alias]
-    d = difftool
+    d = difftool --dir-diff
     lga = log --branches --remotes --tags --graph --decorate --oneline --date=relative
     lg = log --graph --decorate --oneline
     lgf = log --graph --decorate --oneline --first-parent
