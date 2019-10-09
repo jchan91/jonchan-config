@@ -15,6 +15,7 @@ SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;C:\tools\nuget
 SET PATH=%PATH%;C:\tools\Strings
+SET PATH=%PATH%;%APPDATA%\scripts
 
 REM General packaging
 SET PATH=%PATH%;C:\ProgramData\chocolatey\bin
