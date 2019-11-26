@@ -1,4 +1,4 @@
-# jonchan-config
+# profile_config
 
 ## Config for:
 - bash
