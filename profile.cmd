@@ -48,7 +48,7 @@ REM Azure
 SET PATH=%PATH%;C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy
 
 REM Android
-SET ANDROID_HOME=C:\Users\jonchan\AppData\Local\Android\Sdk
+SET ANDROID_HOME=%LOCALAPPDATA%\Android\Sdk
 DOSKEY adb=%ANDROID_HOME%\platform-tools\adb.exe $*
 
 REM Java
