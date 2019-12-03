@@ -1,6 +1,8 @@
 param(
     $installGit,
     $matlabScripts,
+    $installVsCode,
+    $installExtensions,
     $isTest = $true
 )
 
@@ -59,6 +61,21 @@ function Invoke-Cmd(
 }
 
 
+# Prompts the host with a true/false question. Returns their answer.
+function AskHostTrueFalse($question) {
+    $response = Read-Host -Prompt "$question (y/n)"
+    $response = $response.ToLower()
+
+    return $response -eq "y"
+}
+
+
+# Prompts the host with a question. Returns their string answer.
+function AskHostString($question) {
+    return Read-Host -Prompt "$question (leave empty to skip)"
+}
+
+
 #####################################
 ## Main Logic
 #####################################
@@ -67,23 +84,33 @@ $appDataRoot = $ENV:APPDATA
 
 # Prompot user for inputs
 if (-Not $installGit) {
-    $installGit = Read-Host -Prompt "Install git config? (y/n)"
+    $installGit = AskHostTrueFalse("Install git config?")
 }
 if (-Not $matlabScripts) {
-    $matlabScripts = Read-Host -Prompt "Enter MATLAB Scripts Root (leave empty to skip)"
+    $matlabScripts = AskHostString("Enter MATLAB Scripts Root")
+}
+if (-Not $installVsCode) {
+    $installVsCode = AskHostTrueFalse("Install VSCode config?")
+}
+if (-Not $installExtensions) {
+    $installExtensions = AskHostTrueFalse("Set default programs for certain extensions?")
 }
 
 # Git
-if ($installGit -and ($installGit.ToLower() -eq "y")) {
-    $customGitConfigPath = "$appDataRoot\config\.gitconfig"
+if ($installGit) {
+    Write-Host "Installing git config"
 
-    $cmd = "git"
-    $params = @(
-        "config",
-        "--global",
-        "--add", "include.path", $customGitConfigPath
-    )
-    Invoke-Cmd -cmd $cmd -params $params
+    if (-not $isTest) {
+        $customGitConfigPath = "$appDataRoot\config\.gitconfig"
+
+        $cmd = "git"
+        $params = @(
+            "config",
+            "--global",
+            "--add", "include.path", $customGitConfigPath
+        )
+        Invoke-Cmd -cmd $cmd -params $params
+    }
 }
 
 # Matlab
@@ -95,11 +122,23 @@ if ($matlabScripts) {
     if (-Not (Test-Path -Path $matlabProfilePath)) {
         mkdir -Force $matlabProfilePath
     }
-    Write-Host "$matlabProfilePath\startup.m"
     Copy-SettingsFile -src "$matlabScripts\startup.m" -dst "$matlabProfilePath\startup.m"
 }
 
 # VSCode
-$exampleVsCodeSettingsPath = "$PSScriptRoot\example.vscode.settings.json"
-$dstVsCodeSettingsPath = "$appDataRoot\Code\User\settings.json"
-Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
+if ($installVsCode) {
+    Write-Host "Setting up VSCode"
+
+    $exampleVsCodeSettingsPath = "$PSScriptRoot\example.vscode.settings.json"
+    $dstVsCodeSettingsPath = "$appDataRoot\Code\User\settings.json"
+    Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
+}
+
+# Extensions
+if ($installExtensions) {
+    Write-Host "Setting up default programs for extensions"
+
+    if (-not $isTest) {
+        setExtensionDefaults.bat
+    }
+}
