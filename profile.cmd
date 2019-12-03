@@ -13,8 +13,8 @@ SET PATH=%PATH%;C:\Program Files\doxygen\bin
 SET PATH=%PATH%;C:\Program Files (x86)\Graphviz2.38\bin
 SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
-SET PATH=%PATH%;C:\tools\nuget
-SET PATH=%PATH%;C:\tools\Strings
+SET PATH=%PATH%;C:\ProgramData\tools\nuget
+SET PATH=%PATH%;C:\ProgramData\tools\Strings
 SET PATH=%PATH%;%APPDATA%\scripts
 
 REM General packaging
@@ -75,7 +75,7 @@ DOSKEY rcopy=robocopy /E /R:0 $*
 DOSKEY emacs=start emacsclient -t $*
 DOSKEY fzf=fzf --print0 $* ^| clip
 DOSKEY tree=tree /A $* ^| less -i
-DOSKEY find=C:\tools\GnuWin32\bin\find.exe $*
+DOSKEY find=C:\Program Files\Git\usr\bin\find.exe $*
 
 REM Alias for running source depot razzle
 DOSKEY razzle=%APPDATA%\razzle.cmd $*
