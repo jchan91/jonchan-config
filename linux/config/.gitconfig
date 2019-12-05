@@ -1,0 +1,31 @@
+[alias]
+    d = difftool --dir-diff
+    lga = log --branches --remotes --tags --graph --decorate --oneline --date=relative
+    lg = log --graph --decorate --oneline
+    lgf = log --graph --decorate --oneline --first-parent
+    s = status
+    ch = checkout
+    f = fetch --all --prune --tags
+    c = commit
+    cne = commit --amend --no-edit
+    au = add -u :/
+    cp = cherry-pick
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = true
+[core]
+    editor = code
+    fscache = true
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[merge]
+    tool = meld
+[push]
+    default = upstream
+[user]
+    email = jchchan91@gmail.com
+    name = Jonathan Chan

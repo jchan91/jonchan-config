@@ -1,0 +1,2 @@
+[include]
+	path = ~/profile_config/linux/config/.gitconfig
