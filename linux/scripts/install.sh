@@ -1,5 +1,22 @@
 #!/bin/bash
 
+askUserYesNoQuestion() {
+    response=false
+
+    question=$1
+
+    read -p "$question (y/n)" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        response=true
+    fi
+
+    return response
+}
+
+
+what_to_install="$1"
+
 # Get this script's directory
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
@@ -52,18 +69,46 @@ if ! [[ -e "$fzf_path" ]]; then
 fi
 
 # Install C++
-sudo apt-get install -y g++ cmake
+install_cpp=false
+if [[ what_to_install == "all" ]]; then
+    install_cpp=true
+else
+    install_cpp=askUserYesNoQuestion "Install C++?"
+fi
+
+if [[ install_cpp == true ]]; then
+    sudo apt-get install -y g++ cmake
+fi
 
 # Install bonus packages
-sudo apt-get install -y meld
+install_bonuses=false
+if [[ what_to_install == "all" ]]; then
+    install_bonuses=true
+else
+    install_bonuses=askUserYesNoQuestion "Install bonus packages?"
+fi
+
+if [[ $install_bonuses == true ]]; then
+    sudo apt-get install -y meld
+fi
 
 #####################################################
 ## Stuff that requires manual intervention
 #####################################################
 
 # Install Anaconda
-anaconda_installer_path="$script_dir/temp/Miniconda3-latest-Linux-x86_64.sh"
-if ! [[ -e "$anaconda_installer_path" ]]; then
-    wget -O "$anaconda_installer_path" https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    sh "$anaconda_installer_path"
+install_conda=false
+if [[ what_to_install == "all" ]]; then
+    install_conda=true
+else
+    install_conda=askUserYesNoQuestion "Install bonus Anaconda for python?"
 fi
+
+if [[ $install_conda == true ]]; then
+    anaconda_installer_path="$script_dir/temp/Miniconda3-latest-Linux-x86_64.sh"
+    if ! [[ -e "$anaconda_installer_path" ]]; then
+        wget -O "$anaconda_installer_path" https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+        sh "$anaconda_installer_path"
+    fi
+fi
+
