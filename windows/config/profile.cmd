@@ -81,7 +81,7 @@ DOSKEY tree=tree /A $* ^| less -i
 DOSKEY find=C:\Program Files\Git\usr\bin\find.exe $*
 
 REM Alias for running source depot razzle
-DOSKEY razzle=%script_dir%razzle.cmd $*
+DOSKEY razzle=%script_dir%..\razzle.cmd $*
 
 REM Setup VS env variables. ***Must be called last***
 IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat" (
