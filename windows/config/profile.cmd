@@ -2,8 +2,8 @@
 
 echo "Loading profile.cmd"
 
+REM Note that this script is in the config dir
 set script_dir=%~dp0
-echo %script_dir%
 
 REM Set command prompt coloring
 REM set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m>$S$E[0m
@@ -18,7 +18,7 @@ SET PATH=%PATH%;C:\Program Files\KDiff3
 SET PATH=%PATH%;C:\Program Files\GTK2-Runtime Win64\bin
 SET PATH=%PATH%;C:\ProgramData\tools\nuget
 SET PATH=%PATH%;C:\ProgramData\tools\Strings
-SET PATH=%PATH%;%script_dir%config\scripts
+SET PATH=%PATH%;%script_dir%..\
 
 REM General packaging
 SET PATH=%PATH%;C:\ProgramData\chocolatey\bin
@@ -67,8 +67,8 @@ REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY grep=grep --color -n $*
 DOSKEY sublime=start sublime_text.exe -n $*
-DOSKEY editprofile=sublime_text.exe -n %script_dir%config\profile.cmd
-DOSKEY sourceprofile=call %script_dir%config\profile.cmd
+DOSKEY editprofile=sublime_text.exe -n %script_dir%profile.cmd
+DOSKEY sourceprofile=call %script_dir%profile.cmd
 DOSKEY rmdir=rmdir /q/s $*
 DOSKEY cd=cd /d $*
 DOSKEY clipp=echo ^| set /p="%%CD%%" ^| clip
@@ -81,7 +81,7 @@ DOSKEY tree=tree /A $* ^| less -i
 DOSKEY find=C:\Program Files\Git\usr\bin\find.exe $*
 
 REM Alias for running source depot razzle
-DOSKEY razzle=%script_dir%config\razzle.cmd $*
+DOSKEY razzle=%script_dir%razzle.cmd $*
 
 REM Setup VS env variables. ***Must be called last***
 IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat" (

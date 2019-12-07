@@ -156,6 +156,6 @@ if ($installExtensions) {
     Write-Host "Setting up default programs for extensions"
 
     if (-not $isTest) {
-        setExtensionDefaults.bat
+        & "$scriptRoot\setExtensionDefaults.bat"
     }
 }
