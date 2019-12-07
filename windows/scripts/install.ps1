@@ -101,7 +101,6 @@ if (-Not $installExtensions) {
     $installExtensions = AskHostTrueFalse("Set default programs for certain extensions?")
 }
 
-
 # ConEmu
 if ($installConEmu) {
     Write-Host "Install ConEmu"
@@ -111,13 +110,15 @@ if ($installConEmu) {
     Copy-SettingsFile -src $exampleConEmuPath -dst $dstConEmuPath
 }
 
+# Razzle
+
 
 # Git
 if ($installGit) {
     Write-Host "Installing git config"
 
     if (-not $isTest) {
-        $customGitConfigPath = "$appDataRoot\profile_config\windows\config\.gitconfig"
+        $customGitConfigPath = "$appDataRoot\config\.gitconfig"
 
         $cmd = "git"
         $params = @(
@@ -145,7 +146,7 @@ if ($matlabScripts) {
 if ($installVsCode) {
     Write-Host "Setting up VSCode"
 
-    $exampleVsCodeSettingsPath = "$scriptRoot\example.vscode.settings.json"
+    $exampleVsCodeSettingsPath = "$PSScriptRoot\example.vscode.settings.json"
     $dstVsCodeSettingsPath = "$appDataRoot\Code\User\settings.json"
     Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
 }

@@ -116,7 +116,7 @@
 				<line data="{Shells::cmd (Admin) razzle}"/>
 				<line data="{Shells::cmd (Admin)}"/>
 				<line data="{Shells::cmd}"/>
-				<line data="&quot;C:\WINDOWS\SYSTEM32\cmd.exe&quot; &amp; cmd.exe /k %APPDATA%\profile.cmd"/>
+				<line data="&quot;C:\WINDOWS\SYSTEM32\cmd.exe&quot; &amp; cmd.exe /k %APPDATA%\profile_config\windows\config\profile.cmd"/>
 				<line data="{Cygwin::Bash}"/>
 				<line data="{Shells::cmd {Admin} razzle}"/>
 			</value>
@@ -587,7 +587,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a /k %APPDATA%\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a /k %APPDATA%\profile_config\windows\config\profile.cmd"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
@@ -678,18 +678,18 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k %APPDATA%\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:E:\ &amp; cmd.exe /k %APPDATA%\profile_config\windows\config\profile.cmd"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data="-new_console:d:D:\"/>
-					<value name="Cmd3" type="string" data="%APPDATA%\profile.cmd"/>
+					<value name="Cmd3" type="string" data="%APPDATA%\profile_config\windows\config\profile.cmd"/>
 				</key>
 				<key name="Task13" modified="2018-11-27 17:44:30" build="161206">
 					<value name="Name" type="string" data="{myCmd}"/>
 					<value name="Flags" type="dword" data="00000001"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:C:\ &amp; cmd.exe /k %APPDATA%\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:d:C:\ &amp; cmd.exe /k %APPDATA%\profile_config\windows\config\profile.cmd"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data="set PROMPT=$_$E[0m[$E[33m$P$E[0m]$S &amp; cmd.exe"/>
@@ -699,7 +699,7 @@
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:C:\ &amp; cmd.exe /k %APPDATA%\profile.cmd"/>
+					<value name="Cmd1" type="string" data="set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m&gt;$S$E[0m &amp; cmd.exe -new_console:a:d:C:\ &amp; cmd.exe /k %APPDATA%\profile_config\windows\config\profile.cmd"/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
