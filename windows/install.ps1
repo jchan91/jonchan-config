@@ -105,7 +105,7 @@ if (-Not $installExtensions) {
 if ($installConEmu) {
     Write-Host "Install ConEmu"
 
-    $exampleConEmuPath = "$scriptRoot\..\config\ConEmu.xml.example"
+    $exampleConEmuPath = "$scriptRoot\config\ConEmu.xml.example"
     $dstConEmuPath = "$appDataRoot\ConEmu.xml"
     Copy-SettingsFile -src $exampleConEmuPath -dst $dstConEmuPath
 }
@@ -146,7 +146,7 @@ if ($matlabScripts) {
 if ($installVsCode) {
     Write-Host "Setting up VSCode"
 
-    $exampleVsCodeSettingsPath = "$PSScriptRoot\example.vscode.settings.json"
+    $exampleVsCodeSettingsPath = "$scriptRoot\config\example.vscode.settings.json"
     $dstVsCodeSettingsPath = "$appDataRoot\Code\User\settings.json"
     Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
 }
