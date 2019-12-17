@@ -10,8 +10,6 @@ askUserYesNoQuestion() {
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         response=true
     fi
-
-    return response
 }
 
 
@@ -73,7 +71,8 @@ install_cpp=false
 if [[ what_to_install == "all" ]]; then
     install_cpp=true
 else
-    install_cpp=askUserYesNoQuestion "Install C++?"
+    askUserYesNoQuestion "Install C++?"
+    install_cpp=$response
 fi
 
 if [[ install_cpp == true ]]; then
@@ -85,7 +84,8 @@ install_bonuses=false
 if [[ what_to_install == "all" ]]; then
     install_bonuses=true
 else
-    install_bonuses=askUserYesNoQuestion "Install bonus packages?"
+    askUserYesNoQuestion "Install bonus packages?"
+    install_bonuses=$response
 fi
 
 if [[ $install_bonuses == true ]]; then
@@ -101,7 +101,8 @@ install_conda=false
 if [[ what_to_install == "all" ]]; then
     install_conda=true
 else
-    install_conda=askUserYesNoQuestion "Install bonus Anaconda for python?"
+    askUserYesNoQuestion "Install bonus Anaconda for python?"
+    install_conda=$response
 fi
 
 if [[ $install_conda == true ]]; then
