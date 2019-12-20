@@ -12,16 +12,27 @@ askUserYesNoQuestion() {
     fi
 }
 
-
 what_to_install="$1"
+determineWhetherToInstall() {
+    should_install=false
+
+    question=$1
+
+    if [[ what_to_install == "all" ]]; then
+        should_install=true
+    else
+        askUserYesNoQuestion "$question"
+        should_install="$response"
+    fi
+}
 
 # Get this script's directory
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 # Create a temp dir for this script
-temp_dir="$script_dir/temp"
+temp_dir="$HOME/temp"
 if ! [[ -e "$temp_dir" ]]; then
-    mkdir "$script_dir/temp"
+    mkdir "$temp_dir"
 fi
 
 # Update apt
@@ -29,7 +40,7 @@ sudo apt-get update
 
 # Install git commands
 # Overwrite existing user's .gitconfig
-src_gitconfig_path="$script_dir/../config/.gitconfig.for_user_profile"
+src_gitconfig_path="$script_dir/config/.gitconfig.for_user_profile"
 dst_gitconfig_path="$HOME/.gitconfig"
 if ! [[ -e "$dst_gitconfig_path" ]]; then
     cp "$src_gitconfig_path" "$dst_gitconfig_path"
@@ -41,6 +52,7 @@ sudo apt-get install -y vim
 sudo apt-get install -y curl
 sudo apt-get install -y silversearcher-ag
 sudo snap install tree
+sudo apt install xsel xclip
 
 # Install oh-my-zsh
 # Only install if it's not already there
@@ -66,50 +78,74 @@ if ! [[ -e "$fzf_path" ]]; then
     yes | "$HOME/.fzf/install"
 fi
 
-# Install C++
-install_cpp=false
-if [[ what_to_install == "all" ]]; then
-    install_cpp=true
-else
-    askUserYesNoQuestion "Install C++?"
-    install_cpp=$response
+# Install Linuxbrew
+determineWhetherToInstall "Install LinuxBrew?"
+install_linuxbrew=$should_install
+if [[ $install_linuxbrew == true ]]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+    echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.zprofile
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
+
+# Install C++
+determineWhetherToInstall "Install C++?"
+install_cpp=$should_install
 
 if [[ install_cpp == true ]]; then
     sudo apt-get install -y g++ cmake
 fi
 
-# Install bonus packages
-install_bonuses=false
-if [[ what_to_install == "all" ]]; then
-    install_bonuses=true
-else
-    askUserYesNoQuestion "Install bonus packages?"
-    install_bonuses=$response
+# Install git-credential-manager
+determineWhetherToInstall "Install git-credential-manager?"
+install_git_cred_manager=$should_install
+
+if [[ $install_git_cred_manager == true ]]; then
+    brew update
+    brew install git-credential-manager
+    git-credential-manager install
+    sudo git config --global credential.canFallBackToInsecureStore true
 fi
+
+# Install Powershell
+determineWhetherToInstall "Install Powershell?"
+install_powershell=$should_install
+
+if [[ $install_powershell == true ]]; then
+    wget -O "$temp_dir/packages-microsoft-prod.deb" -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    sudo apt-get update
+    sudo add-apt-repository universe
+    sudo apt-get install -y powershell
+
+    sudo apt-get install -y apt-transport-https
+    sudo apt-get update
+    sudo apt-get install -y dotnet-sdk-3.1
+fi
+
+# Install bonus packages
+determineWhetherToInstall "Install bonus packages?"
+install_bonuses=$should_install
 
 if [[ $install_bonuses == true ]]; then
     sudo apt-get install -y meld
 fi
 
 #####################################################
+## TODO: Add aliases to .zshrc or alias file
+#####################################################
+
+#####################################################
 ## Stuff that requires manual intervention
 #####################################################
 
 # Install Anaconda
-install_conda=false
-if [[ what_to_install == "all" ]]; then
-    install_conda=true
-else
-    askUserYesNoQuestion "Install bonus Anaconda for python?"
-    install_conda=$response
-fi
+determineWhetherToInstall "Install Anaconda for python?"
+install_conda=$should_install
 
 if [[ $install_conda == true ]]; then
-    anaconda_installer_path="$script_dir/temp/Miniconda3-latest-Linux-x86_64.sh"
+    anaconda_installer_path="$temp_dir/Miniconda3-latest-Linux-x86_64.sh"
     if ! [[ -e "$anaconda_installer_path" ]]; then
         wget -O "$anaconda_installer_path" https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
         sh "$anaconda_installer_path"
     fi
 fi
-
