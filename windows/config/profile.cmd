@@ -1,12 +1,14 @@
 @echo off
 
+set use_vs_build=%1
+
 echo "Loading profile.cmd"
 
 REM Note that this script is in the config dir
 set script_dir=%~dp0
 
 REM Set command prompt coloring
-REM set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m>$S$E[0m
+set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m$G$S$E[0m
 color 0b
 
 REM Setting PATH
@@ -83,12 +85,14 @@ DOSKEY find=C:\Program Files\Git\usr\bin\find.exe $*
 REM Alias for running source depot razzle
 DOSKEY razzle=%script_dir%..\razzle.cmd $*
 
-REM Setup VS env variables. ***Must be called last***
-IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat" (
-    echo "Loading VS Community Build bat"
-    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat"
-)
-IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat" (
-    echo "Loading VS Enterprise Build bat"
-    "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+IF "%use_vs_build%"=="use_vs_build" (
+    REM Setup VS env variables. ***Must be called last***
+    IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat" (
+        echo "Loading VS Community Build bat"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat"
+    )
+    IF EXIST "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat" (
+        echo "Loading VS Enterprise Build bat"
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
+    )
 )

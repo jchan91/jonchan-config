@@ -7,6 +7,13 @@ param(
     $isTest = $true
 )
 
+if ($isTest) {
+    Write-Host "Running in test mode. Pass '-isTest $false' to effect real changes."
+}
+else {
+    Write-Host "Running real mode"
+}
+
 #####################################
 ## Functions
 #####################################
