@@ -5,7 +5,8 @@ REM See https://social.technet.microsoft.com/Forums/ie/en-US/06d35f90-56cb-4dec-
 set "scriptDir=%~dp0"
 
 REM Text Files
-set "openTxtScriptPath=%scriptDir%sublime.cmd"
+REM set "openTxtScriptPath=%scriptDir%sublime.cmd"
+set "openTxtScriptPath=%scriptDir%vscode.cmd"
 ftype txtfile=%openTxtScriptPath% "%%1"
 
 REM CSV Files

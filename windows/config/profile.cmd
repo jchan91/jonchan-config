@@ -6,6 +6,7 @@ echo "Loading profile.cmd"
 
 REM Note that this script is in the config dir
 set script_dir=%~dp0
+set config_root=%script_dir%..\..\
 
 REM Set command prompt coloring
 set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m$G$S$E[0m
@@ -69,13 +70,15 @@ REM Useful utility commands
 REM DOSKEY igrep=findstr /psinc:$1 $2 $3 $4 $5
 DOSKEY grep=grep --color -n $*
 DOSKEY sublime=start sublime_text.exe -n $*
-DOSKEY editprofile=sublime_text.exe -n %script_dir%profile.cmd
+REM DOSKEY editprofile=code -n %script_dir%profile.cmd
+DOSKEY editprofile=code -n %config_root%
 DOSKEY sourceprofile=call %script_dir%profile.cmd
+DOSKEY cdprofile=cd /d %config_root%
 DOSKEY rmdir=rmdir /q/s $*
 DOSKEY cd=cd /d $*
 DOSKEY clipp=echo ^| set /p="%%CD%%" ^| clip
 DOSKEY less=less -i $*
-DOSKEY home=cd /d %APPDATA%
+DOSKEY home=cd /d %APPDATA%\profile_config
 DOSKEY rcopy=robocopy /E /R:0 $*
 DOSKEY emacs=start emacsclient -t $*
 DOSKEY fzf=fzf --print0 $* ^| clip

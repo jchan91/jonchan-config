@@ -1,27 +1,22 @@
+Import-Module "common.psm1" -Force
+
 param(
     $installConEmu,
     $installGit,
     $matlabScripts,
     $installVsCode,
-    $installExtensions,
-    $isTest = $true
+    $installExtensions
 )
-
-if ($isTest) {
-    Write-Host "Running in test mode. Pass '-isTest $false' to effect real changes."
-}
-else {
-    Write-Host "Running real mode"
-}
 
 #####################################
 ## Functions
 #####################################
 function Copy-SettingsFile(
     $src,
-    $dst
+    $dst,
+    $isTest=$false
 ) {
-    if ($isTest) {
+    if (-not $isTest) {
         if (-Not (Test-Path -Path $src)) {
             Write-Host "$src does not exist"
             return
@@ -55,7 +50,7 @@ function Invoke-Cmd(
     $params,
     $stdOutPath = ""
 ) {
-    if ($isTest) {
+    if ($readyToCommit) {
         Write-Host "Would run: $cmd $params"
         return
     }
@@ -74,19 +69,40 @@ function AskHostTrueFalse($question) {
     $response = Read-Host -Prompt "$question (y/n)"
     $response = $response.ToLower()
 
-    return $response -eq "y"
+    $responseIsTrue = $response -eq "y"
+
+    if ($responseIsTrue) {
+        Write-Host "User responded Yes"
+    } 
+    else {
+        Write-Host "User responded No"
+    }
+
+    return $responseIsTrue
 }
 
 
 # Prompts the host with a question. Returns their string answer.
 function AskHostString($question) {
-    return Read-Host -Prompt "$question (leave empty to skip)"
+    $response = Read-Host -Prompt "$question (leave empty or respond 'n' to skip)"
+
+    if (-not $matlabScripts -or ($matlabScripts -eq "n")) {
+        Write-Host "User responded with empty\n"
+    }
+    else
+    {
+        Write-Host "User responded with: $response\n"
+    }
 }
 
 
 #####################################
 ## Main Logic
 #####################################
+
+# Run as admin
+Invoke-ScriptAsAdmin $PSCommandPath
+
 $username = $ENV:USERNAME
 $appDataRoot = $ENV:APPDATA
 $scriptRoot = $PSScriptRoot
@@ -108,8 +124,18 @@ if (-Not $installExtensions) {
     $installExtensions = AskHostTrueFalse("Set default programs for certain extensions?")
 }
 
+# Ask if user wants to commit
+Write-Host ""
+Write-Host ""
+$readyToCommit = AskHostTrueFalse("Are you sure you want to make the above changes?")
+if (-not $readyToCommit) {
+    return
+}
+Write-Host ""
+Write-Host ""
+
 # ConEmu
-if ($installConEmu) {
+if ($installConEmu -and $readyToCommit) {
     Write-Host "Install ConEmu"
 
     $exampleConEmuPath = "$scriptRoot\config\ConEmu.xml.example"
@@ -121,24 +147,21 @@ if ($installConEmu) {
 
 
 # Git
-if ($installGit) {
+if ($installGit -and $readyToCommit) {
     Write-Host "Installing git config"
+    $customGitConfigPath = "$appDataRoot\config\.gitconfig"
 
-    if (-not $isTest) {
-        $customGitConfigPath = "$appDataRoot\config\.gitconfig"
-
-        $cmd = "git"
-        $params = @(
-            "config",
-            "--global",
-            "--add", "include.path", $customGitConfigPath
-        )
-        Invoke-Cmd -cmd $cmd -params $params
-    }
+    $cmd = "git"
+    $params = @(
+        "config",
+        "--global",
+        "--add", "include.path", $customGitConfigPath
+    )
+    Invoke-Cmd -cmd $cmd -params $params
 }
 
 # Matlab
-if ($matlabScripts) {
+if ($matlabScripts -and $readyToCommit) {
     Write-Host "Setting up Matlab"
 
     $userProfilePath = Get-Item $ENV:USERPROFILE
@@ -150,7 +173,7 @@ if ($matlabScripts) {
 }
 
 # VSCode
-if ($installVsCode) {
+if ($installVsCode -and $readyToCommit) {
     Write-Host "Setting up VSCode"
 
     $exampleVsCodeSettingsPath = "$scriptRoot\config\example.vscode.settings.json"
@@ -159,10 +182,7 @@ if ($installVsCode) {
 }
 
 # Default file extensions
-if ($installExtensions) {
+if ($installExtensions -and $readyToCommit) {
     Write-Host "Setting up default programs for extensions"
-
-    if (-not $isTest) {
-        & "$scriptRoot\setExtensionDefaults.bat"
-    }
+    & "$scriptRoot\setExtensionDefaults.bat"
 }
