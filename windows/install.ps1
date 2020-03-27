@@ -1,5 +1,3 @@
-Import-Module "common.psm1" -Force
-
 param(
     $installConEmu,
     $installGit,
@@ -7,6 +5,9 @@ param(
     $installVsCode,
     $installExtensions
 )
+
+$scriptRoot = $PSScriptRoot
+Import-Module "$scriptRoot\common.psm1" -Force
 
 #####################################
 ## Functions
@@ -16,7 +17,7 @@ function Copy-SettingsFile(
     $dst,
     $isTest=$false
 ) {
-    if (-not $isTest) {
+    if ($isTest) {
         if (-Not (Test-Path -Path $src)) {
             Write-Host "$src does not exist"
             return
