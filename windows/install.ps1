@@ -49,9 +49,10 @@ function Copy-SettingsFile(
 function Invoke-Cmd(
     $cmd,
     $params,
-    $stdOutPath = ""
+    $stdOutPath = "",
+    $isTest=$false
 ) {
-    if ($readyToCommit) {
+    if ($isTest) {
         Write-Host "Would run: $cmd $params"
         return
     }
@@ -106,7 +107,6 @@ Invoke-ScriptAsAdmin $PSCommandPath
 
 $username = $ENV:USERNAME
 $appDataRoot = $ENV:APPDATA
-$scriptRoot = $PSScriptRoot
 
 # Prompt user for inputs
 if (-Not $installConEmu) {
@@ -150,9 +150,19 @@ if ($installConEmu -and $readyToCommit) {
 # Git
 if ($installGit -and $readyToCommit) {
     Write-Host "Installing git config"
-    $customGitConfigPath = "$appDataRoot\config\.gitconfig"
+    $customGitConfigPath = "$scriptRoot\config\.gitconfig"
 
     $cmd = "git"
+
+    # Unset any existing git config include.path
+    $params = @(
+        "config",
+        "--global",
+        "--unset-all", "include.path"
+    )
+    Invoke-Cmd -cmd $cmd -params $params
+
+    # Set include.path
     $params = @(
         "config",
         "--global",
