@@ -1,6 +1,7 @@
 param(
     $installConEmu,
     $installGit,
+    $installPsSetup,
     $matlabScripts,
     $installVsCode,
     $installExtensions
@@ -97,6 +98,10 @@ function AskHostString($question) {
     }
 }
 
+function InstallProfile() {
+    Copy-Item "$scriptRoot\profile.ps1" $profile -Force
+}
+
 
 #####################################
 ## Main Logic
@@ -114,6 +119,9 @@ if (-Not $installConEmu) {
 }
 if (-Not $installGit) {
     $installGit = AskHostTrueFalse("Install git config?")
+}
+if (-Not $installPsSetup) {
+    $installPsSetup = AskHostTrueFalse("Install Powershell setup?")
 }
 if (-Not $matlabScripts) {
     $matlabScripts = AskHostString("Enter MATLAB Scripts Root")
@@ -144,9 +152,6 @@ if ($installConEmu -and $readyToCommit) {
     Copy-SettingsFile -src $exampleConEmuPath -dst $dstConEmuPath
 }
 
-# Razzle
-
-
 # Git
 if ($installGit -and $readyToCommit) {
     Write-Host "Installing git config"
@@ -169,6 +174,15 @@ if ($installGit -and $readyToCommit) {
         "--add", "include.path", $customGitConfigPath
     )
     Invoke-Cmd -cmd $cmd -params $params
+}
+
+# Powershell
+if ($installPsSetup -and $readyToCommit) {
+    Write-Host "Installing Powershell profile setup"
+
+    Install-Module posh-git -Scope CurrentUser
+    Install-Module oh-my-posh -Scope CurrentUser
+    InstallProfile
 }
 
 # Matlab

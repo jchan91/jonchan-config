@@ -18,3 +18,45 @@ function Invoke-ScriptAsAdmin(
         # Do nothing. Already admin.
     }
 }
+
+function Invoke-Exe(
+    [string]$exePath,
+    [string[]]$params,
+    [string]$stdOutPath = "",
+    [switch]$StartDaemon
+) {
+    $binPath = [System.IO.Path]::GetDirectoryName($exePath)
+    $isPathSyntax = (-not [string]::IsNullOrWhiteSpace($binPath)) -and (Test-Path -Path $binPath -IsValid)
+
+    # If caller gave a full path to exe, then verify exe exists.
+    # Otherwise, just rely on process environment to resolve the exe
+    if ($isPathSyntax -and (-not (Test-Path -Path $exePath))) {
+        throw "'$exePath' does not exist"
+    }
+
+    Write-Host "$exePath $params"
+    Push-Location $binPath
+    if (-not $startDaemon) {
+        if ($stdOutPath) {
+            & $exePath $params *>&1 | Out-File -FilePath $stdOutPath -Encoding ASCII
+        }
+        else {
+            & $exePath $params
+        }
+
+        if ($LASTEXITCODE -ne 0) {
+            Pop-Location
+            $last_exit_code = $LASTEXITCODE
+            throw "$exePath $params exited with non-zero: $last_exit_code"
+        }
+    }
+    else {
+        if ($stdOutPath) {
+            Start-Job -Init ([ScriptBlock]::Create("Set-Location '$pwd'")) -ScriptBlock { & $Using:exePath $Using:params *>&1 | Out-File -FilePath $Using:stdOutPath -Encoding ASCII }
+        }
+        else {
+            Start-Job -Init ([ScriptBlock]::Create("Set-Location '$pwd'")) -ScriptBlock { & $Using:exePath $Using:params }
+        }
+    }
+    Pop-Location
+}
