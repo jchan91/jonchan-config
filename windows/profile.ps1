@@ -78,7 +78,10 @@ Set-Alias -Name editprofile -Value EditProfileAlias
 # function SourceProfileAlias() { & "$script_root\profile.ps1" }
 # Set-Alias -Name sourceprofile -Value SourceProfileAlias
 
-function UpdateProfileAlias { Copy-Item "$script_dir\profile.ps1" $profile -Force }
+function UpdateProfileAlias() {
+    Copy-Item "$script_dir\profile.ps1" $profile -Force
+    Copy-Item "$script_dir\profile.ps1" "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1" -Force
+}
 Set-Alias -Name updateprofile -Value UpdateProfileAlias
 
 function CdProfileAlias() { Set-Location $config_root}
