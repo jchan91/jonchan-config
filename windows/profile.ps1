@@ -45,6 +45,7 @@ $env:PATH += "C:\Program Files (x86)\Meld;"
 # Editors
 # $env:PATH += "C:\Program Files\Microsoft VS Code\;"
 $env:PATH += "C:\Program Files\Sublime Text 3\;"
+$env:PATH += "C:\Users\jonch\AppData\Local\Programs\Microsoft VS Code\;"
 
 # Python stuff
 $conda_path = "C:\ProgramData\Anaconda3\Scripts"
