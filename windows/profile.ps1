@@ -2,21 +2,33 @@ param(
     $use_vs_build=$false
 )
 
+
+function SetupOhMyPosh($script_dir) {
+    Import-Module posh-git
+    Import-Module oh-my-posh
+    Set-Prompt
+    Set-Theme Honukai
+    $ThemeSettings.Colors.PromptHighlightColor = [ConsoleColor]::Cyan
+    
+    # Load repository paths to ignore
+    $poshGitIgnoreFilePath = "$script_dir\config\poshgit_ignore.txt"
+    foreach ($line in Get-Content $poshGitIgnoreFilePath) {
+        $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $line
+    }
+}
+
+
 Write-Host "Loading profile.ps1"
-
-# Use oh-my-posh
-Import-Module posh-git
-Import-Module oh-my-posh
-Set-Prompt
-Set-Theme Honukai
-$ThemeSettings.Colors.PromptHighlightColor = [ConsoleColor]::Cyan
-
 # Note that this script is in the config dir
-$config_root = "$env:APPDATA\profile_config" # TODO: Make this more generic
 $script_dir = "$config_root\windows"
-
+$config_root = "$env:APPDATA\profile_config" # TODO: Make this more generic
 Import-Module "$script_dir\common.psm1" -Force
 
+
+### Main
+
+# Use oh-my-posh
+SetupOhMyPosh -script_dir $script_dir
 
 # Set command prompt coloring
 # set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m$G$S$E[0m
@@ -82,6 +94,8 @@ Set-Alias -Name editprofile -Value EditProfileAlias
 function UpdateProfileAlias() {
     Copy-Item "$script_dir\profile.ps1" $profile -Force
     Copy-Item "$script_dir\profile.ps1" "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1" -Force
+
+    . $profile
 }
 Set-Alias -Name updateprofile -Value UpdateProfileAlias
 
