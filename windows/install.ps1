@@ -99,7 +99,49 @@ function AskHostString($question) {
 }
 
 function InstallProfile() {
-    Copy-Item "$scriptRoot\profile.ps1" $profile -Force
+    $customProfilePath = "$scriptRoot\profile.ps1"
+
+    if (Test-Path $profile) {
+        $overwrite = AskHostTrueFalse "Powershell profile already exists. Overwrite?"
+        if ($overwrite) {
+            Write-Host "Removed existing profile"
+            Remove-Item $profile
+        }
+
+        Add-Content $profile ('. "' + $customProfilePath + '"')
+    }
+
+    # VS Code profile path
+    $vscodeProfileDir = "$env:USERPROFILE\Documents\WindowsPowerShell"
+    if (Test-Path $vscodeProfileDir) {
+        $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
+
+        if (Test-Path $vscodeProfilePath) {
+            $overwrite = AskHostTrueFalse "VS Code Powershell profile already exists. Overwrite?"
+            if ($overwrite) {
+                Write-Host "Removed existing profile"
+                Remove-Item $vscodeProfilePath
+            }
+
+            Add-Content $vscodeProfilePath ('. "' + $customProfilePath + '"')
+        }
+    }
+
+    # Alternate VS Code profile path
+    $vscodeProfileDir = "$env:USERPROFILE\OneDrive - Microsoft\Documents\WindowsPowerShell"
+    if (Test-Path $vscodeProfileDir) {
+        $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
+
+        if (Test-Path $vscodeProfilePath) {
+            $overwrite = AskHostTrueFalse "VS Code Powershell profile already exists. Overwrite?"
+            if ($overwrite) {
+                Write-Host "Removed existing profile"
+                Remove-Item $vscodeProfilePath
+            }
+
+            Add-Content $vscodeProfilePath ('. "' + $customProfilePath + '"')
+        }
+    }
 }
 
 
@@ -211,3 +253,6 @@ if ($installExtensions -and $readyToCommit) {
     Write-Host "Setting up default programs for extensions"
     & "$scriptRoot\setExtensionDefaults.bat"
 }
+
+Write-Host "Installation Complete"
+Start-Sleep -Seconds 3

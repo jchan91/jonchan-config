@@ -12,8 +12,10 @@ function SetupOhMyPosh($script_dir) {
     
     # Load repository paths to ignore
     $poshGitIgnoreFilePath = "$script_dir\config\poshgit_ignore.txt"
-    foreach ($line in Get-Content $poshGitIgnoreFilePath) {
-        $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $line
+    if (Test-Path $poshGitIgnoreFilePath) {
+        foreach ($line in Get-Content $poshGitIgnoreFilePath) {
+            $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $line
+        }
     }
 }
 
@@ -93,7 +95,18 @@ Set-Alias -Name editprofile -Value EditProfileAlias
 
 function UpdateProfileAlias() {
     Copy-Item "$script_dir\profile.ps1" $profile -Force
-    Copy-Item "$script_dir\profile.ps1" "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.VSCode_profile.ps1" -Force
+
+    # VS Code profile path
+    $vscodeProfileDir = "$env:USERPROFILE\Documents\WindowsPowerShell"
+    if (Test-Path $vscodeProfileDir) {
+        Copy-Item "$script_dir\profile.ps1" "$vscodeProfileDir\Microsoft.VSCode_profile.ps1" -Force
+    }
+
+    # Alternate VS Code profile path
+    $vscodeProfileDir = "$env:USERPROFILE\OneDrive - Microsoft\Documents\WindowsPowerShell"
+    if (Test-Path $vscodeProfileDir) {
+        Copy-Item "$script_dir\profile.ps1" "$vscodeProfileDir\Microsoft.VSCode_profile.ps1" -Force
+    }
 
     . $profile
 }
