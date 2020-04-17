@@ -22,8 +22,8 @@ function SetupOhMyPosh($script_dir) {
 
 Write-Host "Loading profile.ps1"
 # Note that this script is in the config dir
-$script_dir = "$config_root\windows"
 $config_root = "$env:APPDATA\profile_config" # TODO: Make this more generic
+$script_dir = "$config_root\windows"
 Import-Module "$script_dir\common.psm1" -Force
 
 
