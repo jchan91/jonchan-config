@@ -23,7 +23,7 @@ function SetupOhMyPosh($script_dir) {
 function AddToPathIfNotExists(
     [string[]] $pathsToAppend) {
     
-    $currentPaths = $env:PAth -split ";"
+    $currentPaths = $env:PATH -split ";"
     foreach ($path in $pathsToAppend) {
         # Only add a path if it doesn't already exist in current list of paths
         # Whole string match, case sensitive
