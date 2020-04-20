@@ -20,6 +20,26 @@ function SetupOhMyPosh($script_dir) {
 }
 
 
+function AddToPathIfNotExists(
+    [string[]] $pathsToAppend) {
+    
+    $currentPaths = $env:PAth -split ";"
+    foreach ($path in $pathsToAppend) {
+        # Only add a path if it doesn't already exist in current list of paths
+        # Whole string match, case sensitive
+        if ($currentPaths -contains $path) {
+            continue
+        }
+
+        # Add the path
+        $currentPaths += $path
+    }
+
+    # Set the PATH variable
+    $env:PATH = $currentPaths -join ";"
+}
+
+
 Write-Host "Loading profile.ps1"
 # Note that this script is in the config dir
 $config_root = "$env:APPDATA\profile_config" # TODO: Make this more generic
@@ -33,35 +53,36 @@ Import-Module "$script_dir\common.psm1" -Force
 SetupOhMyPosh -script_dir $script_dir
 
 # Setting PATH
+$includePaths = New-Object Collections.Generic.List[string]
 
 # Misc
-$env:PATH += ";C:\Program Files\doxygen\bin"
-$env:PATH += ";C:\Program Files (x86)\Graphviz2.38\bin"
-$env:PATH += ";C:\Program Files\KDiff3"
-$env:PATH += ";C:\Program Files\GTK2-Runtime Win64\bin"
-$env:PATH += ";C:\ProgramData\tools\nuget"
-$env:PATH += ";C:\ProgramData\tools\Strings"
-$env:PATH += ";$script_dir"
+$includePaths.Add("C:\Program Files\doxygen\bin")
+$includePaths.Add("C:\Program Files (x86)\Graphviz2.38\bin")
+$includePaths.Add("C:\Program Files\KDiff3")
+$includePaths.Add("C:\Program Files\GTK2-Runtime Win64\bin")
+$includePaths.Add("C:\ProgramData\tools\nuget")
+$includePaths.Add("C:\ProgramData\tools\Strings")
+$includePaths.Add($script_dir)
 
 # General packaging
-$env:PATH += ";C:\ProgramData\chocolatey\bin"
-$env:PATH += ";C:\Users\$env:USERNAME\pkgs\bin"
+$includePaths.Add("C:\ProgramData\chocolatey\bin")
+$includePaths.Add("C:\Users\$env:USERNAME\pkgs\bin")
 
 # Git
-$env:PATH += ";C:\Program Files\Git\bin"
-$env:PATH += ";C:\Program Files\Git\usr\bin"
-$env:PATH += ";C:\Program Files (x86)\Meld"
+$includePaths.Add("C:\Program Files\Git\bin")
+$includePaths.Add("C:\Program Files\Git\usr\bin")
+$includePaths.Add("C:\Program Files (x86)\Meld")
 
 # Editors
-# $env:PATH += ";C:\Program Files\Microsoft VS Code\"
-$env:PATH += ";C:\Program Files\Sublime Text 3\"
-$env:PATH += ";C:\Users\jonch\AppData\Local\Programs\Microsoft VS Code\"
+# $includePaths.Add("C:\Program Files\Microsoft VS Code\")
+$includePaths.Add("C:\Program Files\Sublime Text 3")
+$includePaths.Add("C:\Users\jonch\AppData\Local\Programs\Microsoft VS Code")
 
 # Python stuff
-$env:PATH += ";C:\ProgramData\Anaconda3\Scripts"
+$includePaths.Add("C:\ProgramData\Anaconda3\Scripts")
 
 # Azure
-$env:PATH += ";C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy"
+$includePaths.Add("C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy")
 
 # Android
 # Set-Variable "$env:ANDROID_HOME" "$env:LOCALAPPDATA\Android\Sdk"
@@ -70,10 +91,13 @@ $env:PATH += ";C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy"
 # Set-Variable "$env:JAVA_HOME" "C:\Program Files\Java\jdk1.8.0_201"
 
 # CMake
-$env:PATH += ";C:\Program Files\CMake\bin"
+$includePaths.Add("C:\Program Files\CMake\bin")
 
 # smerge
-$env:PATH += ";C:\Program Files\Sublime Merge"
+$includePaths.Add("C:\Program Files\Sublime Merge")
+
+# Set the path variable
+AddToPathIfNotExists($includePaths)
 
 # Useful utility commands
 function TitleAlias($name) { $host.ui.RawUI.WindowTitle = $name }
