@@ -84,12 +84,6 @@ $includePaths.Add("C:\ProgramData\Anaconda3\Scripts")
 # Azure
 $includePaths.Add("C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy")
 
-# Android
-# Set-Variable "$env:ANDROID_HOME" "$env:LOCALAPPDATA\Android\Sdk"
-
-# Java
-# Set-Variable "$env:JAVA_HOME" "C:\Program Files\Java\jdk1.8.0_201"
-
 # CMake
 $includePaths.Add("C:\Program Files\CMake\bin")
 
@@ -99,6 +93,16 @@ $includePaths.Add("C:\Program Files\Sublime Merge")
 # Set the path variable
 AddToPathIfNotExists($includePaths)
 
+
+### Other environment variables
+# Android
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+
+# Java
+$env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_201"
+
+
+### Aliases
 # Useful utility commands
 function TitleAlias($name) { $host.ui.RawUI.WindowTitle = $name }
 Set-Alias -Name title -Value TitleAlias
@@ -111,25 +115,6 @@ Set-Alias -Name editprofile -Value EditProfileAlias
 
 # function SourceProfileAlias() { & "$script_root\profile.ps1" }
 # Set-Alias -Name sourceprofile -Value SourceProfileAlias
-
-function UpdateProfileAlias() {
-    Copy-Item "$script_dir\profile.ps1" $profile -Force
-
-    # VS Code profile path
-    $vscodeProfileDir = "$env:USERPROFILE\Documents\WindowsPowerShell"
-    if (Test-Path $vscodeProfileDir) {
-        Copy-Item "$script_dir\profile.ps1" "$vscodeProfileDir\Microsoft.VSCode_profile.ps1" -Force
-    }
-
-    # Alternate VS Code profile path
-    $vscodeProfileDir = "$env:USERPROFILE\OneDrive - Microsoft\Documents\WindowsPowerShell"
-    if (Test-Path $vscodeProfileDir) {
-        Copy-Item "$script_dir\profile.ps1" "$vscodeProfileDir\Microsoft.VSCode_profile.ps1" -Force
-    }
-
-    . $profile
-}
-Set-Alias -Name updateprofile -Value UpdateProfileAlias
 
 function CdProfileAlias() { Set-Location $config_root}
 Set-Alias -Name cdprofile -Value CdProfileAlias
