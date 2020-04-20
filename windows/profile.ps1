@@ -32,53 +32,48 @@ Import-Module "$script_dir\common.psm1" -Force
 # Use oh-my-posh
 SetupOhMyPosh -script_dir $script_dir
 
-# Set command prompt coloring
-# set PROMPT=$_$E[31m$T$_$E[0:37m$+$E[1;33m$M$E[0:37m$E[1;33m$P$E[0:37m$_$E[0:37m$G$S$E[0m
-# color 0b
-
 # Setting PATH
 
 # Misc
-$env:PATH += "C:\Program Files\doxygen\bin;"
-$env:PATH += "C:\Program Files (x86)\Graphviz2.38\bin;"
-$env:PATH += "C:\Program Files\KDiff3;"
-$env:PATH += "C:\Program Files\GTK2-Runtime Win64\bin;"
-$env:PATH += "C:\ProgramData\tools\nuget;"
-$env:PATH += "C:\ProgramData\tools\Strings;"
-$env:PATH += "$script_dir;"
+$env:PATH += ";C:\Program Files\doxygen\bin"
+$env:PATH += ";C:\Program Files (x86)\Graphviz2.38\bin"
+$env:PATH += ";C:\Program Files\KDiff3"
+$env:PATH += ";C:\Program Files\GTK2-Runtime Win64\bin"
+$env:PATH += ";C:\ProgramData\tools\nuget"
+$env:PATH += ";C:\ProgramData\tools\Strings"
+$env:PATH += ";$script_dir"
 
 # General packaging
-$env:PATH += "C:\ProgramData\chocolatey\bin;"
-$env:PATH += "C:\Users\$env:USERNAME\pkgs\bin;"
+$env:PATH += ";C:\ProgramData\chocolatey\bin"
+$env:PATH += ";C:\Users\$env:USERNAME\pkgs\bin"
 
 # Git
-$env:PATH += "C:\Program Files\Git\bin;"
-$env:PATH += "C:\Program Files\Git\usr\bin;"
-$env:PATH += "C:\Program Files (x86)\Meld;"
+$env:PATH += ";C:\Program Files\Git\bin"
+$env:PATH += ";C:\Program Files\Git\usr\bin"
+$env:PATH += ";C:\Program Files (x86)\Meld"
 
 # Editors
-# $env:PATH += "C:\Program Files\Microsoft VS Code\;"
-$env:PATH += "C:\Program Files\Sublime Text 3\;"
-$env:PATH += "C:\Users\jonch\AppData\Local\Programs\Microsoft VS Code\;"
+# $env:PATH += ";C:\Program Files\Microsoft VS Code\"
+$env:PATH += ";C:\Program Files\Sublime Text 3\"
+$env:PATH += ";C:\Users\jonch\AppData\Local\Programs\Microsoft VS Code\"
 
 # Python stuff
-$conda_path = "C:\ProgramData\Anaconda3\Scripts"
-$env:PATH += $conda_path
+$env:PATH += ";C:\ProgramData\Anaconda3\Scripts"
 
 # Azure
-$env:PATH += "C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy;"
+$env:PATH += ";C:\Program Files (x86)\Microsoft SDKs\Azure\AzCopy"
 
 # Android
-Set-Variable "ANDROID_HOME" "$env:LOCALAPPDATA\Android\Sdk"
+# Set-Variable "$env:ANDROID_HOME" "$env:LOCALAPPDATA\Android\Sdk"
 
 # Java
-Set-Variable "JAVA_HOME" "C:\Program Files\Java\jdk1.8.0_201"
+# Set-Variable "$env:JAVA_HOME" "C:\Program Files\Java\jdk1.8.0_201"
 
 # CMake
-$env:PATH += "C:\Program Files\CMake\bin;"
+$env:PATH += ";C:\Program Files\CMake\bin"
 
 # smerge
-$env:PATH += "C:\Program Files\Sublime Merge;"
+$env:PATH += ";C:\Program Files\Sublime Merge"
 
 # Useful utility commands
 function TitleAlias($name) { $host.ui.RawUI.WindowTitle = $name }
