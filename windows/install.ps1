@@ -68,79 +68,24 @@ function Invoke-Cmd(
 
 
 # Prompts the host with a true/false question. Returns their answer.
-function AskHostTrueFalse($question) {
-    $response = Read-Host -Prompt "$question (y/n)"
-    $response = $response.ToLower()
-
-    $responseIsTrue = $response -eq "y"
-
-    if ($responseIsTrue) {
-        Write-Host "User responded Yes"
-    } 
-    else {
-        Write-Host "User responded No"
-    }
-
-    return $responseIsTrue
-}
-
-
-# Prompts the host with a question. Returns their string answer.
-function AskHostString($question) {
-    $response = Read-Host -Prompt "$question (leave empty or respond 'n' to skip)"
-
-    if (-not $matlabScripts -or ($matlabScripts -eq "n")) {
-        Write-Host "User responded with empty\n"
-    }
-    else
-    {
-        Write-Host "User responded with: $response\n"
-    }
-}
-
 function InstallProfile() {
-    $customProfilePath = "$scriptRoot\profile.ps1"
+    # Default ps1 profile path
+    AddProfile($profile)
 
-    if (Test-Path $profile) {
-        $overwrite = AskHostTrueFalse "Powershell profile already exists. Overwrite?"
-        if ($overwrite) {
-            Write-Host "Removed existing profile"
-            Remove-Item $profile
-        }
-
-        Add-Content $profile ('. "' + $customProfilePath + '"')
-    }
-
-    # VS Code profile path
-    $vscodeProfileDir = "$env:USERPROFILE\Documents\WindowsPowerShell"
+    # VS Code profile path. Only install of we detect VSCode ps dir
+    $vscodeProfileDir = "$env:USERPROFILE\Documents\PowerShell"
     if (Test-Path $vscodeProfileDir) {
         $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
 
-        if (Test-Path $vscodeProfilePath) {
-            $overwrite = AskHostTrueFalse "VS Code Powershell profile already exists. Overwrite?"
-            if ($overwrite) {
-                Write-Host "Removed existing profile"
-                Remove-Item $vscodeProfilePath
-            }
-
-            Add-Content $vscodeProfilePath ('. "' + $customProfilePath + '"')
-        }
+        AddProfile($vscodeProfilePath)
     }
 
-    # Alternate VS Code profile path
-    $vscodeProfileDir = "$env:USERPROFILE\OneDrive - Microsoft\Documents\WindowsPowerShell"
+    # Alternate VS Code profile path. Only install of we detect VSCode ps dir
+    $vscodeProfileDir = "$env:USERPROFILE\OneDrive - Microsoft\Documents\PowerShell"
     if (Test-Path $vscodeProfileDir) {
         $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
 
-        if (Test-Path $vscodeProfilePath) {
-            $overwrite = AskHostTrueFalse "VS Code Powershell profile already exists. Overwrite?"
-            if ($overwrite) {
-                Write-Host "Removed existing profile"
-                Remove-Item $vscodeProfilePath
-            }
-
-            Add-Content $vscodeProfilePath ('. "' + $customProfilePath + '"')
-        }
+        AddProfile($vscodeProfilePath)
     }
 }
 

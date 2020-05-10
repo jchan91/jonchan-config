@@ -60,3 +60,50 @@ function Invoke-Exe(
     }
     Pop-Location
 }
+
+function AskHostTrueFalse($question) {
+    $response = Read-Host -Prompt "$question (y/n)"
+    $response = $response.ToLower()
+
+    $responseIsTrue = $response -eq "y"
+
+    if ($responseIsTrue) {
+        Write-Host "User responded Yes"
+    } 
+    else {
+        Write-Host "User responded No"
+    }
+
+    return $responseIsTrue
+}
+
+
+# Prompts the host with a question. Returns their string answer.
+function AskHostString($question) {
+    $response = Read-Host -Prompt "$question (leave empty or respond 'n' to skip)"
+
+    if (-not $matlabScripts -or ($matlabScripts -eq "n")) {
+        Write-Host "User responded with empty\n"
+    }
+    else
+    {
+        Write-Host "User responded with: $response\n"
+    }
+}
+
+function AddProfile($profilePath) {
+    $scriptRoot = $PSScriptRoot
+    $customProfilePath = "$scriptRoot\profile.ps1"
+
+    # Check if we should overwrite
+    if (Test-Path $profilePath) {
+        $overwrite = AskHostTrueFalse "Powershell profile '$profilePath' already exists. Remove existing profile?"
+        if ($overwrite) {
+            Write-Host "Removed existing profile"
+            Remove-Item $profilePath
+        }
+    }
+
+    Write-Host "Adding to custom profile to '$profilePath'"
+    Add-Content $profilePath ('. "' + $customProfilePath + '"')
+}

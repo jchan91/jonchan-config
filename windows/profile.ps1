@@ -116,6 +116,9 @@ Set-Alias -Name editprofile -Value EditProfileAlias
 # function SourceProfileAlias() { & "$script_root\profile.ps1" }
 # Set-Alias -Name sourceprofile -Value SourceProfileAlias
 
+function InstallProfileAlias($profilePath) { AddProfile($profilePath) }
+Set-Alias -Name installprofile -Value InstallProfileAlias
+
 function CdProfileAlias() { Set-Location $config_root}
 Set-Alias -Name cdprofile -Value CdProfileAlias
 
