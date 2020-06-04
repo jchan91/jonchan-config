@@ -40,7 +40,6 @@ function AddToPathIfNotExists(
 }
 
 
-Write-Host "Loading profile.ps1"
 # Note that this script is in the config dir
 $config_root = "$env:APPDATA\profile_config" # TODO: Make this more generic
 $script_dir = "$config_root\windows"
@@ -60,7 +59,6 @@ $includePaths.Add("C:\Program Files\doxygen\bin")
 $includePaths.Add("C:\Program Files (x86)\Graphviz2.38\bin")
 $includePaths.Add("C:\Program Files\KDiff3")
 $includePaths.Add("C:\Program Files\GTK2-Runtime Win64\bin")
-$includePaths.Add("C:\ProgramData\tools\nuget")
 $includePaths.Add("C:\ProgramData\tools\Strings")
 $includePaths.Add($script_dir)
 
@@ -131,26 +129,13 @@ Set-Alias -Name clipp -Value ClippAlias
 # function FzfAlias { fzf.exe --print0 $args | clip }
 # Set-Alias -Name fzf -Value FzfAlias
 
-# function TreeAlias() { tree.exe /A $args | less.exe -i }
-# Set-Alias -Name tree -Value TreeAlias
+function TreeAlias() { tree.com /A $args | less.exe -i }
+Set-Alias -Name tree -Value TreeAlias
 
 function AdbAlias() { & "$env:ANDROID_HOME\platform-tools\adb.exe" $args }
 Set-Alias -Name adb -Value AdbAlias
 
 if ($use_vs_build) {
     # Setup VS env variables. ***Must be called last***
-
-    # Try VS Community
-    $msbuild_bat_path = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat"
-    if (Test-Path $msbuild_bat_path) {
-        Write-Host "Loading VS Community Build bat"
-        & $msbuild_bat_path
-    }
-
-    # Try VS Enterprise
-    $msbuild_bat_path = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
-    if (Test-Path $msbuild_bat_path) {
-        Write-Host "Loading VS Enterprise Build bat"
-        & $msbuild_bat_path
-    }
+    TryLoadMsBuild
 }
