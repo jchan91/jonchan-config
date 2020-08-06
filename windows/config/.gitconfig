@@ -30,7 +30,7 @@
     cmd = meld.exe \"$LOCAL\" \"$REMOTE\"
     prompt = false
 [merge]
-    tool = meld
+    tool = smerge
 [mergetool "meld"]
     cmd = meld.exe \"$LOCAL\" \"$MERGED\" \"$REMOTE\" \"$MERGED\"
     trustExitCode = true
