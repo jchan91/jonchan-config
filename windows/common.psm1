@@ -19,7 +19,7 @@ function Invoke-ScriptAsAdmin(
     }
 }
 
-function Invoke-Exe(
+function Invoke-ExeInternal(
     [string]$exePath,
     [string[]]$params,
     [string]$stdOutPath = "",

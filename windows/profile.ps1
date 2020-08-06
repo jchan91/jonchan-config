@@ -14,7 +14,12 @@ function SetupOhMyPosh($script_dir) {
     $poshGitIgnoreFilePath = "$script_dir\config\poshgit_ignore.txt"
     if (Test-Path $poshGitIgnoreFilePath) {
         foreach ($line in Get-Content $poshGitIgnoreFilePath) {
-            $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $line
+            $trimmedLine = $line.Trim()
+            if ($trimmedLine.Length -eq 0) {
+                continue
+            }
+
+            $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $trimmedLine
         }
     }
 }
@@ -37,6 +42,25 @@ function AddToPathIfNotExists(
 
     # Set the PATH variable
     $env:PATH = $currentPaths -join ";"
+}
+
+
+function LoadCustomModules($scriptDir) {
+    $modulesFilePath = "$scriptDir\config\custom_ps_modules.txt"
+    if (Test-Path $modulesFilePath) {
+        foreach ($line in Get-Content $modulesFilePath) {
+            $trimmedLine = $line.Trim()
+            if ($trimmedLine.Length -eq 0) {
+                continue
+            }
+
+            if (-Not (Test-Path $trimmedLine)) {
+                continue
+            }
+
+            Import-Module $trimmedLine
+        }
+    }
 }
 
 
@@ -105,7 +129,7 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_201"
 function TitleAlias($name) { $host.ui.RawUI.WindowTitle = $name }
 Set-Alias -Name title -Value TitleAlias
 
-function SublimeAlias() { Invoke-Exe -exePath sublime_text.exe -params @("-n", $args) -StartDaemon }
+function SublimeAlias() { Invoke-ExeInternal -exePath sublime_text.exe -params @("-n", $args) -StartDaemon }
 Set-Alias -Name sublime -Value SublimeAlias
 
 function EditProfileAlias() { code -n $config_root }
@@ -134,6 +158,9 @@ Set-Alias -Name tree -Value TreeAlias
 
 function AdbAlias() { & "$env:ANDROID_HOME\platform-tools\adb.exe" $args }
 Set-Alias -Name adb -Value AdbAlias
+
+# Load custom modules
+LoadCustomModules $script_dir
 
 if ($use_vs_build) {
     # Setup VS env variables. ***Must be called last***
