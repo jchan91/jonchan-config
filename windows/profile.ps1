@@ -159,6 +159,23 @@ Set-Alias -Name tree -Value TreeAlias
 function AdbAlias() { & "$env:ANDROID_HOME\platform-tools\adb.exe" $args }
 Set-Alias -Name adb -Value AdbAlias
 
+function RCopyAlias([string] $src, [string] $dst) {
+    if (($src.Length -eq 0) -or ($dst.Length -eq 0)) {
+        throw "Usage: rcopy <src> <dst>"
+    }
+
+    if (Test-Path $src -PathType leaf) {
+        $srcFolder = [System.IO.Path]::GetDirectoryName($src)
+        $srcFileName = [System.IO.Path]::GetFileName($src)
+
+        robocopy /J /Z $srcFolder $dst $srcFileName
+    }
+    else {
+        robocopy /J /Z $src $dst
+    }
+}
+Set-Alias -Name rcopy -Value RCopyAlias
+
 # Load custom modules
 LoadCustomModules $script_dir
 
