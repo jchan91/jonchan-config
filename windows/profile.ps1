@@ -169,10 +169,10 @@ function RCopyAlias([string] $src, [string] $dst) {
         $srcFolder = [System.IO.Path]::GetDirectoryName($src)
         $srcFileName = [System.IO.Path]::GetFileName($src)
 
-        robocopy /J /Z $srcFolder $dst $srcFileName
+        robocopy /J /Z /E $srcFolder $dst $srcFileName
     }
     else {
-        robocopy /J /Z $src $dst
+        robocopy /J /Z /E $src $dst
     }
 }
 Set-Alias -Name rcopy -Value RCopyAlias
