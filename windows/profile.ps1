@@ -65,8 +65,9 @@ function LoadCustomModules($scriptDir) {
 
 
 # Note that this script is in the config dir
-$config_root = "$env:APPDATA\profile_config" # TODO: Make this more generic
-$script_dir = "$config_root\windows"
+$script_root = $PSScriptRoot
+$repo_root = [System.IO.Path]::GetFullPath("$script_root\..\")
+$script_dir = "$repo_root\windows"
 Import-Module "$script_dir\common.psm1" -Force
 
 
@@ -132,7 +133,7 @@ Set-Alias -Name title -Value TitleAlias
 function SublimeAlias() { Invoke-ExeInternal -exePath sublime_text.exe -params @("-n", $args) -StartDaemon }
 Set-Alias -Name sublime -Value SublimeAlias
 
-function EditProfileAlias() { code -n $config_root }
+function EditProfileAlias() { code -n $repo_root }
 Set-Alias -Name editprofile -Value EditProfileAlias
 
 # function SourceProfileAlias() { & "$script_root\profile.ps1" }
@@ -141,7 +142,7 @@ Set-Alias -Name editprofile -Value EditProfileAlias
 function InstallProfileAlias($profilePath) { AddProfile($profilePath) }
 Set-Alias -Name installprofile -Value InstallProfileAlias
 
-function CdProfileAlias() { Set-Location $config_root}
+function CdProfileAlias() { Set-Location $repo_root}
 Set-Alias -Name cdprofile -Value CdProfileAlias
 
 function ClippAlias() { Set-Clipboard $pwd.Path }
