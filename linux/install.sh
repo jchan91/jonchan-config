@@ -1,29 +1,41 @@
 #!/bin/bash
+set -e
+
+askUserQuestion() {
+    local question=$1
+
+    local nl=$'\n'
+    read -p "$question$nl"
+
+    echo $REPLY
+}
 
 askUserYesNoQuestion() {
-    response=false
+    local response=false
 
-    question=$1
+    local question=$1
+    local reply=$(askUserQuestion "$question (y/n)")
 
-    read -p "$question (y/n)" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        response=true
+    if [[ $reply =~ ^[Yy]$ ]]; then
+        local response=true
     fi
+
+    echo $response
 }
 
 what_to_install="$1"
 determineWhetherToInstall() {
-    should_install=false
+    local should_install=false
 
-    question=$1
+    local question=$1
 
     if [[ what_to_install == "all" ]]; then
         should_install=true
     else
-        askUserYesNoQuestion "$question"
-        should_install="$response"
+        should_install=$(askUserYesNoQuestion "$question")
     fi
+
+    echo $should_install
 }
 
 # Get this script's directory
@@ -79,26 +91,38 @@ if ! [[ -e "$fzf_path" ]]; then
 fi
 
 # Install Linuxbrew
-determineWhetherToInstall "Install LinuxBrew?"
-install_linuxbrew=$should_install
+install_linuxbrew=$(determineWhetherToInstall "Install LinuxBrew?")
 if [[ $install_linuxbrew == true ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.zprofile
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+    # Add Linuxbrew to .profile. Need to add following string to profile.
+    # e.g.
+    #
+    # eval $(/home/jonchan/.linuxbrew/bin/brew shellenv)
+    #
+
+    # Ask user where they installed linuxbrew
+    linuxbrew_dir=$(askUserQuestion "Enter the path to .linuxbrew below (e.g. /home/jonchan):")
+
+    # Create the string we need to add to the profile
+    linuxbrew_path_cmd='eval $('
+    linuxbrew_path_cmd+="$linuxbrew_dir/.linuxbrew/bin/brew shellenv"
+    linuxbrew_path_cmd+=')'
+    echo "$linuxbrew_path_cmd" >> ~/.profile
+    echo "$linuxbrew_path_cmd" >> ~/.zprofile
+
+    # Execute command in local shell so brew is immediately available
+    $linuxbrew_path_cmd
 fi
 
 # Install C++
-determineWhetherToInstall "Install C++?"
-install_cpp=$should_install
-
+install_cpp=$(determineWhetherToInstall "Install C++?")
 if [[ install_cpp == true ]]; then
     sudo apt-get install -y g++ cmake
 fi
 
 # Install git-credential-manager
-determineWhetherToInstall "Install git-credential-manager?"
-install_git_cred_manager=$should_install
-
+install_git_cred_manager=$(determineWhetherToInstall "Install git-credential-manager?")
 if [[ $install_git_cred_manager == true ]]; then
     brew update
     brew install git-credential-manager
@@ -107,9 +131,7 @@ if [[ $install_git_cred_manager == true ]]; then
 fi
 
 # Install Powershell
-determineWhetherToInstall "Install Powershell?"
-install_powershell=$should_install
-
+install_powershell=$(determineWhetherToInstall "Install Powershell?")
 if [[ $install_powershell == true ]]; then
     wget -O "$temp_dir/packages-microsoft-prod.deb" -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
     sudo dpkg -i packages-microsoft-prod.deb
@@ -123,9 +145,7 @@ if [[ $install_powershell == true ]]; then
 fi
 
 # Install bonus packages
-determineWhetherToInstall "Install bonus packages?"
-install_bonuses=$should_install
-
+install_bonuses=$(determineWhetherToInstall "Install bonus packages?")
 if [[ $install_bonuses == true ]]; then
     sudo apt-get install -y meld
 fi
@@ -139,9 +159,7 @@ fi
 #####################################################
 
 # Install Anaconda
-determineWhetherToInstall "Install Anaconda for python?"
-install_conda=$should_install
-
+install_conda=$(determineWhetherToInstall "Install Anaconda for python?")
 if [[ $install_conda == true ]]; then
     anaconda_installer_path="$temp_dir/Miniconda3-latest-Linux-x86_64.sh"
     if ! [[ -e "$anaconda_installer_path" ]]; then
