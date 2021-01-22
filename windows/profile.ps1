@@ -2,73 +2,11 @@ param(
     $use_vs_build=$false
 )
 
-
-function SetupOhMyPosh($script_dir) {
-    Import-Module posh-git
-    Import-Module oh-my-posh
-    Set-Prompt
-    Set-Theme Honukai
-    $ThemeSettings.Colors.PromptHighlightColor = [ConsoleColor]::Cyan
-    
-    # Load repository paths to ignore
-    $poshGitIgnoreFilePath = "$script_dir\config\poshgit_ignore.txt"
-    if (Test-Path $poshGitIgnoreFilePath) {
-        foreach ($line in Get-Content $poshGitIgnoreFilePath) {
-            $trimmedLine = $line.Trim()
-            if ($trimmedLine.Length -eq 0) {
-                continue
-            }
-
-            $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $trimmedLine
-        }
-    }
-}
-
-
-function AddToPathIfNotExists(
-    [string[]] $pathsToAppend) {
-    
-    $currentPaths = $env:PATH -split ";"
-    foreach ($path in $pathsToAppend) {
-        # Only add a path if it doesn't already exist in current list of paths
-        # Whole string match, case sensitive
-        if ($currentPaths -contains $path) {
-            continue
-        }
-
-        # Add the path
-        $currentPaths += $path
-    }
-
-    # Set the PATH variable
-    $env:PATH = $currentPaths -join ";"
-}
-
-
-function LoadCustomModules($scriptDir) {
-    $modulesFilePath = "$scriptDir\config\custom_ps_modules.txt"
-    if (Test-Path $modulesFilePath) {
-        foreach ($line in Get-Content $modulesFilePath) {
-            $trimmedLine = $line.Trim()
-            if ($trimmedLine.Length -eq 0) {
-                continue
-            }
-
-            if (-Not (Test-Path $trimmedLine)) {
-                continue
-            }
-
-            Import-Module $trimmedLine
-        }
-    }
-}
-
-
 # Note that this script is in the config dir
 $script_root = $PSScriptRoot
 $repo_root = [System.IO.Path]::GetFullPath("$script_root\..\")
 $script_dir = "$repo_root\windows"
-Import-Module "$script_dir\common.psm1" -Force
+Import-Module (Join-Path $repo_root 'lib' 'common.psm1') -Force
 
 
 ### Main

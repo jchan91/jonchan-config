@@ -70,7 +70,7 @@ sudo apt install xsel xclip
 # Only install if it's not already there
 zsh_profile_path="$HOME/.zshrc"
 if ! [[ -e "$zsh_profile_path" ]]; then
-    curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # TODO: Modify .zshrc theme to jtriley for WSL
@@ -118,7 +118,7 @@ fi
 # Install C++
 install_cpp=$(determineWhetherToInstall "Install C++?")
 if [[ install_cpp == true ]]; then
-    sudo apt-get install -y g++ cmake
+    sudo apt-get install -y g++ cmake clang lld ninja-build gdb
 fi
 
 # Install git-credential-manager

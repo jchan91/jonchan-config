@@ -7,8 +7,9 @@ param(
     $installExtensions
 )
 
-$scriptRoot = $PSScriptRoot
-Import-Module "$scriptRoot\common.psm1" -Force
+$ErrorActionPreference = "Stop"
+
+Import-Module (Join-Path $PSScriptRoot '..' 'lib' 'common.psm1') -Force
 
 #####################################
 ## Functions
@@ -69,15 +70,17 @@ function Invoke-Cmd(
 
 # Prompts the host with a true/false question. Returns their answer.
 function InstallProfile() {
+    $customProfilePath = Join-Path $PSScriptRoot "profile.ps1"
+
     # Default ps1 profile path
-    AddProfile($profile)
+    AddProfile $profile $customProfilePath
 
     # VS Code profile path. Only install of we detect VSCode ps dir
     $vscodeProfileDir = "$env:USERPROFILE\Documents\PowerShell"
     if (Test-Path $vscodeProfileDir) {
         $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
 
-        AddProfile($vscodeProfilePath)
+        AddProfile $vscodeProfilePath $customProfilePath
     }
 
     # Alternate VS Code profile path. Only install of we detect VSCode ps dir
@@ -85,7 +88,7 @@ function InstallProfile() {
     if (Test-Path $vscodeProfileDir) {
         $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
 
-        AddProfile($vscodeProfilePath)
+        AddProfile $vscodeProfilePath  $customProfilePath
     }
 }
 

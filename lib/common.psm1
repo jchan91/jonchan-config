@@ -1,7 +1,43 @@
+function EnsureDir(
+        # Path of the directory
+        [Parameter(Mandatory=$true)]
+        [string]$dirPath,
+
+        # Whether to ensure directory is empty. Will delete any existing contents.
+        [switch] $Clean,
+
+        # If -Clean is also passed in, prompts the user if they want to delete if path already exists.
+        [switch] $Ask
+    ) {
+    # Check for valid arguments
+    if ($Ask -and (-not $Clean)) {
+        throw "Invalid usage of -AskUser. Must pass in -Clean with -AskUser."
+    }
+
+    # If path exists, clean it up
+    if ($Clean -and (Test-Path $dirPath -ErrorAction Stop)) {
+        if ($Ask) {
+            $cleanPath = AskHostTrueFalse "$dirPath already exists. Overwrite?"
+            if (-not $cleanPath) {
+                throw "Can't ensure a clean directory. Path already exists and user does not want to overwrite."
+            }
+        }
+
+        # Delete the existing directory
+        Remove-Item -Path $dirPath -Recurse -Force -ErrorAction Stop
+    }
+
+    # If path doesn't exist, then mkdir
+    if (-not (Test-Path $dirPath -ErrorAction Stop)) {
+        mkdir $dirPath > $null  # Redirect stdout of mkdir to null
+    }
+}
+
+
 function Invoke-ScriptAsAdmin(
     $scriptPath,
     $argumentList=@()) {
-        
+
     if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
         $shell = DetectShell
 
@@ -104,10 +140,9 @@ function AskHostString($question) {
     }
 }
 
-function AddProfile($profilePath) {
-    $scriptRoot = $PSScriptRoot
-    $customProfilePath = "$scriptRoot\profile.ps1"
 
+# Adds the sourcing of customProfilePath in the $profile of the current shell.
+function AddProfile($profilePath, $customProfilePath) {
     # Check if we should overwrite
     if (Test-Path $profilePath) {
         $overwrite = AskHostTrueFalse "Powershell profile '$profilePath' already exists. Remove existing profile?"
@@ -115,6 +150,12 @@ function AddProfile($profilePath) {
             Write-Host "Removed existing profile"
             Remove-Item $profilePath
         }
+    }
+
+    if (-not (Test-Path $profilePath)) {
+        $profileDir = Split-Path -Path $profilePath
+        EnsureDir -dirPath $profileDir
+        New-Item -Path $profilePath -ItemType "file"
     }
 
     Write-Host "Adding to custom profile to '$profilePath'"
@@ -135,5 +176,66 @@ function TryLoadMsBuild() {
     if (Test-Path $msbuild_bat_path) {
         Write-Host "Loading VS Enterprise Build bat"
         & $msbuild_bat_path
+    }
+}
+
+
+function SetupOhMyPosh($script_dir) {
+    Import-Module posh-git
+    Import-Module oh-my-posh
+    Set-Prompt
+    Set-Theme Honukai
+    $ThemeSettings.Colors.PromptHighlightColor = [ConsoleColor]::Cyan
+
+    # Load repository paths to ignore
+    $poshGitIgnoreFilePath = Join-Path $script_dir 'config' 'poshgit_ignore.txt'
+    if (Test-Path $poshGitIgnoreFilePath) {
+        foreach ($line in Get-Content $poshGitIgnoreFilePath) {
+            $trimmedLine = $line.Trim()
+            if ($trimmedLine.Length -eq 0) {
+                continue
+            }
+
+            $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $trimmedLine
+        }
+    }
+}
+
+
+function AddToPathIfNotExists(
+    [string[]] $pathsToAppend) {
+
+    $currentPaths = $env:PATH -split ";"
+    foreach ($path in $pathsToAppend) {
+        # Only add a path if it doesn't already exist in current list of paths
+        # Whole string match, case sensitive
+        if ($currentPaths -contains $path) {
+            continue
+        }
+
+        # Add the path
+        $currentPaths += $path
+    }
+
+    # Set the PATH variable
+    $env:PATH = $currentPaths -join ";"
+}
+
+
+function LoadCustomModules($scriptDir) {
+    $modulesFilePath = Join-Path $scriptDir 'config' 'custom_ps_modules.txt'
+    if (Test-Path $modulesFilePath) {
+        foreach ($line in Get-Content $modulesFilePath) {
+            $trimmedLine = $line.Trim()
+            if ($trimmedLine.Length -eq 0) {
+                continue
+            }
+
+            if (-Not (Test-Path $trimmedLine)) {
+                continue
+            }
+
+            Import-Module $trimmedLine
+        }
     }
 }
