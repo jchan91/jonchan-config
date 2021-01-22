@@ -89,8 +89,8 @@ Set-Alias -Name clipp -Value ClippAlias
 # function LessAlias() { less.exe -i $args }
 # Set-Alias -Name less -Value LessAlias
 
-# function FzfAlias { fzf.exe --print0 $args | clip }
-# Set-Alias -Name fzf -Value FzfAlias
+function FzfAlias { fzf.exe --print0 $args | clip }
+Set-Alias -Name fzf -Value FzfAlias
 
 function TreeAlias() { tree.com /A $args | less.exe -i }
 Set-Alias -Name tree -Value TreeAlias
