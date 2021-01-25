@@ -52,11 +52,9 @@ sudo apt-get update
 
 # Install git commands
 # Overwrite existing user's .gitconfig
-src_gitconfig_path="$script_dir/config/.gitconfig.for_user_profile"
-dst_gitconfig_path="$HOME/.gitconfig"
-if ! [[ -e "$dst_gitconfig_path" ]]; then
-    cp "$src_gitconfig_path" "$dst_gitconfig_path"
-fi
+git config --global --unset-all include.path
+git config --global --add include.path '~/profile_config/lib/.gitconfig'
+git config --global --add include.path '~/profile_config/linux/config/.gitconfig'
 
 # Install light-weight essentials
 sudo apt-get install -y zsh

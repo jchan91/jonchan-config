@@ -1,31 +1,10 @@
-[alias]
-    d = difftool --dir-diff
-    lga = log --branches --remotes --tags --graph --decorate --oneline --date=relative
-    lg = log --graph --decorate --oneline
-    lgf = log --graph --decorate --oneline --first-parent
-    s = status
-    ch = checkout
-    f = fetch --all --prune --tags
-    c = commit
-    cne = commit --amend --no-edit
-    au = add -u :/
-    cp = cherry-pick
-    su = submodule update --init --recursive
-[color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = true
 [core]
     editor = sublime_text.exe -n -w
     autocrlf = true
-    fscache = true
 [diff]
     tool = meld
 [difftool "bc4"]
     cmd = \"C:/Program Files/Beyond Compare 4/BCompare.exe\" \"$LOCAL\" \"$REMOTE\"
-[difftool]
-    prompt = false
 [difftool "meld"]
     cmd = meld.exe \"$LOCAL\" \"$REMOTE\"
     prompt = false
@@ -40,10 +19,5 @@
 [mergetool "bc4"]
     cmd = \"C:/Program Files/Beyond Compare 4/BCompare.exe\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" \"$MERGED\"
     trustExitCode = true
-[push]
-    default = upstream
-[user]
-    email = jchchan91@gmail.com
-    name = Jonathan Chan
 [credential "osg-perf.vsallin.net"]
 	authority = azure

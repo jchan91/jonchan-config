@@ -145,7 +145,6 @@ if ($installConEmu -and $readyToCommit) {
 # Git
 if ($installGit -and $readyToCommit) {
     Write-Host "Installing git config"
-    $customGitConfigPath = "$scriptRoot\config\.gitconfig"
 
     $cmd = "git"
 
@@ -158,6 +157,15 @@ if ($installGit -and $readyToCommit) {
     Invoke-Cmd -cmd $cmd -params $params
 
     # Set include.path
+    $customGitConfigPath = Join-Path $scriptRoot 'config' '.gitconfig'
+    $params = @(
+        "config",
+        "--global",
+        "--add", "include.path", $customGitConfigPath
+    )
+    Invoke-Cmd -cmd $cmd -params $params
+
+    $customGitConfigPath = Join-Path $scriptRoot '..' 'lib' '.gitconfig'
     $params = @(
         "config",
         "--global",
