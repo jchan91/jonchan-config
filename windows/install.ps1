@@ -76,17 +76,17 @@ function InstallProfile() {
     AddProfile $profile $customProfilePath
 
     # VS Code profile path. Only install of we detect VSCode ps dir
-    $vscodeProfileDir = "$env:USERPROFILE\Documents\PowerShell"
+    $vscodeProfileDir = "$env:USERPROFILE/Documents/PowerShell"
     if (Test-Path $vscodeProfileDir) {
-        $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
+        $vscodeProfilePath = "$vscodeProfileDir/Microsoft.VSCode_profile.ps1"
 
         AddProfile $vscodeProfilePath $customProfilePath
     }
 
     # Alternate VS Code profile path. Only install of we detect VSCode ps dir
-    $vscodeProfileDir = "$env:USERPROFILE\OneDrive - Microsoft\Documents\PowerShell"
+    $vscodeProfileDir = "$env:USERPROFILE/OneDrive - Microsoft/Documents/PowerShell"
     if (Test-Path $vscodeProfileDir) {
-        $vscodeProfilePath = "$vscodeProfileDir\Microsoft.VSCode_profile.ps1"
+        $vscodeProfilePath = "$vscodeProfileDir/Microsoft.VSCode_profile.ps1"
 
         AddProfile $vscodeProfilePath  $customProfilePath
     }
@@ -137,8 +137,8 @@ Write-Host ""
 if ($installConEmu -and $readyToCommit) {
     Write-Host "Install ConEmu"
 
-    $exampleConEmuPath = "$scriptRoot\config\ConEmu.xml.example"
-    $dstConEmuPath = "$appDataRoot\ConEmu.xml"
+    $exampleConEmuPath = Join-Path $PSScriptRoot 'config' 'ConEmu.xml.example'
+    $dstConEmuPath = "$appDataRoot/ConEmu.xml"
     Copy-SettingsFile -src $exampleConEmuPath -dst $dstConEmuPath
 }
 
@@ -157,7 +157,7 @@ if ($installGit -and $readyToCommit) {
     Invoke-Cmd -cmd $cmd -params $params
 
     # Set include.path
-    $customGitConfigPath = Join-Path $scriptRoot 'config' '.gitconfig'
+    $customGitConfigPath = Join-Path $PSScriptRoot '..' 'lib' '.gitconfig' | Resolve-Path
     $params = @(
         "config",
         "--global",
@@ -165,7 +165,7 @@ if ($installGit -and $readyToCommit) {
     )
     Invoke-Cmd -cmd $cmd -params $params
 
-    $customGitConfigPath = Join-Path $scriptRoot '..' 'lib' '.gitconfig'
+    $customGitConfigPath = Join-Path $PSScriptRoot 'config' '.gitconfig' | Resolve-Path
     $params = @(
         "config",
         "--global",
@@ -188,26 +188,26 @@ if ($matlabScripts -and $readyToCommit) {
     Write-Host "Setting up Matlab"
 
     $userProfilePath = Get-Item $ENV:USERPROFILE
-    $matlabProfilePath = "$userProfilePath\Documents\MATLAB"
+    $matlabProfilePath = "$userProfilePath/Documents/MATLAB"
     if (-Not (Test-Path -Path $matlabProfilePath)) {
         mkdir -Force $matlabProfilePath
     }
-    Copy-SettingsFile -src "$matlabScripts\startup.m" -dst "$matlabProfilePath\startup.m"
+    Copy-SettingsFile -src "$matlabScripts/startup.m" -dst "$matlabProfilePath/startup.m"
 }
 
 # VSCode
 if ($installVsCode -and $readyToCommit) {
     Write-Host "Setting up VSCode"
 
-    $exampleVsCodeSettingsPath = "$scriptRoot\config\example.vscode.settings.json"
-    $dstVsCodeSettingsPath = "$appDataRoot\Code\User\settings.json"
+    $exampleVsCodeSettingsPath = Join-Path $PSScriptRoot 'config' 'example.vscode.settings.json'
+    $dstVsCodeSettingsPath = "$appDataRoot/Code/User/settings.json"
     Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
 }
 
 # Default file extensions
 if ($installExtensions -and $readyToCommit) {
     Write-Host "Setting up default programs for extensions"
-    & "$scriptRoot\setExtensionDefaults.bat"
+    & (Join-Path $PSScriptRoot 'setExtensionDefaults.bat')
 }
 
 Write-Host "Installation Complete"
