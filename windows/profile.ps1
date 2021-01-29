@@ -3,10 +3,9 @@ param(
 )
 
 # Note that this script is in the config dir
-$script_root = $PSScriptRoot
-$repo_root = [System.IO.Path]::GetFullPath("$script_root\..\")
-$script_dir = "$repo_root\windows"
-Import-Module (Join-Path $repo_root 'lib' 'common.psm1') -Force
+$script_dir = Resolve-Path $PSScriptRoot
+$repo_root = Resolve-Path "$script_dir/.."
+Import-Module "$repo_root/lib/common.psm1" -Force
 
 
 ### Main

@@ -188,7 +188,7 @@ function SetupOhMyPosh($script_dir) {
     $ThemeSettings.Colors.PromptHighlightColor = [ConsoleColor]::Cyan
 
     # Load repository paths to ignore
-    $poshGitIgnoreFilePath = Join-Path $script_dir 'config' 'poshgit_ignore.txt'
+    $poshGitIgnoreFilePath = "$script_dir/config/poshgit_ignore.txt"
     if (Test-Path $poshGitIgnoreFilePath) {
         foreach ($line in Get-Content $poshGitIgnoreFilePath) {
             $trimmedLine = $line.Trim()
@@ -223,7 +223,7 @@ function AddToPathIfNotExists(
 
 
 function LoadCustomModules($scriptDir) {
-    $modulesFilePath = Join-Path $scriptDir 'config' 'custom_ps_modules.txt'
+    $modulesFilePath = "$scriptDir/config/custom_ps_modules.txt"
     if (Test-Path $modulesFilePath) {
         foreach ($line in Get-Content $modulesFilePath) {
             $trimmedLine = $line.Trim()
