@@ -114,6 +114,11 @@ function RCopyAlias([string] $src, [string] $dst) {
 }
 Set-Alias -Name rcopy -Value RCopyAlias
 
+function DirsAlias([string] $path) {
+    Get-ChildItem -Path $path | Sort-Object -Property LastWriteTime -Descending
+}
+Set-Alias -Name dirs -Value DirsAlias
+
 # Load custom modules
 LoadCustomModules $script_dir
 
