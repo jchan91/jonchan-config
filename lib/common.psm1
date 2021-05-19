@@ -184,8 +184,7 @@ function SetupOhMyPosh($script_dir) {
     Import-Module posh-git
     Import-Module oh-my-posh
     Set-Prompt
-    Set-Theme Honukai
-    $ThemeSettings.Colors.PromptHighlightColor = [ConsoleColor]::Cyan
+    Set-PoshPrompt -Theme Honukai
 
     # Load repository paths to ignore
     $poshGitIgnoreFilePath = "$script_dir/config/poshgit_ignore.txt"
