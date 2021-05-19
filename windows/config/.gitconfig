@@ -9,9 +9,9 @@
     cmd = meld.exe \"$LOCAL\" \"$REMOTE\"
     prompt = false
 [merge]
-    tool = smerge
+    tool = meld
 [mergetool "meld"]
-    cmd = meld.exe \"$LOCAL\" \"$MERGED\" \"$REMOTE\" \"$MERGED\"
+    cmd = meld --diff \"$LOCAL\" \"$MERGED\" \"$REMOTE\" --output \"$MERGED\"
     trustExitCode = true
 [mergetool "smerge"]
     cmd = \"C:/Program Files/Sublime Merge/smerge.exe\" \"mergetool\" \"$MERGED\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
