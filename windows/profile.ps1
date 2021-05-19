@@ -8,6 +8,42 @@ $repo_root = Resolve-Path "$script_dir/.."
 Import-Module "$repo_root/lib/common.psm1" -Force
 
 
+### Functions
+function TryLoadMsBuild(
+    $architecture = "x64"
+) {
+    # Find the MSBuild Developer Prompt .bat script. Search in following order:
+    $locationsForMsBuildToSearch = @(
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat",
+        "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat"
+    )
+
+    $msbuild_bat_path = $null
+    foreach ($path in $locationsForMsBuildToSearch) {
+        if (Test-Path $path) {
+            $msbuild_bat_path = $path
+            break
+        }
+    }
+    if ($null -eq $msbuild_bat_path) {
+        Write-Error "Failed to find MSBuild path"
+        return
+    }
+
+    # Can't just run the .bat file because it will set ENV in a new process. Need to extract out the ENV vars
+    # into current powershell process.
+    # https://stackoverflow.com/questions/2124753/how-can-i-use-powershell-with-the-visual-studio-command-prompt
+    # https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160
+    cmd /c "`"$msbuild_bat_path`" $architecture & set" |
+        foreach {
+            if ($_ -match "=") {
+                $v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
+            }
+        }
+    Write-Host "`nVisual Studio Command Prompt variables set from $msbuild_bat_path targeting $architecture." -ForegroundColor Yellow
+}
+
+
 ### Main
 
 # Use oh-my-posh
@@ -115,9 +151,14 @@ function RCopyAlias([string] $src, [string] $dst) {
 Set-Alias -Name rcopy -Value RCopyAlias
 
 function DirsAlias([string] $path) {
-    Get-ChildItem -Path $path | Sort-Object -Property LastWriteTime -Descending
+    Get-ChildItem -Path $path | Sort-Object -Property LastWriteTime
 }
 Set-Alias -Name dirs -Value DirsAlias
+
+function NpmAlias() {
+    & "C:\Program Files\nodejs\npm.cmd" $args
+}
+Set-Alias -Name npm -Value NpmAlias
 
 # Load custom modules
 LoadCustomModules $script_dir

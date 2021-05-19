@@ -163,23 +163,6 @@ function AddProfile($profilePath, $customProfilePath) {
 }
 
 
-function TryLoadMsBuild() {
-    # Try VS Community
-    $msbuild_bat_path = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat"
-    if (Test-Path $msbuild_bat_path) {
-        Write-Host "Loading VS Community Build bat"
-        & $msbuild_bat_path
-    }
-
-    # Try VS Enterprise
-    $msbuild_bat_path = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsMSBuildCmd.bat"
-    if (Test-Path $msbuild_bat_path) {
-        Write-Host "Loading VS Enterprise Build bat"
-        & $msbuild_bat_path
-    }
-}
-
-
 function SetupOhMyPosh($script_dir) {
     Import-Module posh-git
     Import-Module oh-my-posh
