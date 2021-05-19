@@ -166,7 +166,6 @@ function AddProfile($profilePath, $customProfilePath) {
 function SetupOhMyPosh($script_dir) {
     Import-Module posh-git
     Import-Module oh-my-posh
-    Set-Prompt
     Set-PoshPrompt -Theme Honukai
 
     # Load repository paths to ignore
