@@ -9,7 +9,9 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-Import-Module (Join-Path $PSScriptRoot '..' 'lib' 'common.psm1') -Force
+$scriptRoot = $PSScriptRoot
+
+Import-Module "$scriptRoot/../lib/common.psm1" -Force
 
 #####################################
 ## Functions
@@ -70,7 +72,7 @@ function Invoke-Cmd(
 
 # Prompts the host with a true/false question. Returns their answer.
 function InstallProfile() {
-    $customProfilePath = Join-Path $PSScriptRoot "profile.ps1"
+    $customProfilePath = "$scriptRoot/profile.ps1"
 
     # Default ps1 profile path
     AddProfile $profile $customProfilePath
@@ -137,7 +139,7 @@ Write-Host ""
 if ($installConEmu -and $readyToCommit) {
     Write-Host "Install ConEmu"
 
-    $exampleConEmuPath = Join-Path $PSScriptRoot 'config' 'ConEmu.xml.example'
+    $exampleConEmuPath = "$scriptRoot/config/ConEmu.xml.example"
     $dstConEmuPath = "$appDataRoot/ConEmu.xml"
     Copy-SettingsFile -src $exampleConEmuPath -dst $dstConEmuPath
 }
@@ -157,7 +159,7 @@ if ($installGit -and $readyToCommit) {
     Invoke-Cmd -cmd $cmd -params $params
 
     # Set include.path
-    $customGitConfigPath = Join-Path $PSScriptRoot '..' 'lib' '.gitconfig' | Resolve-Path
+    $customGitConfigPath = "$scriptRoot/../lib/.gitconfig" | Resolve-Path
     $params = @(
         "config",
         "--global",
@@ -165,7 +167,7 @@ if ($installGit -and $readyToCommit) {
     )
     Invoke-Cmd -cmd $cmd -params $params
 
-    $customGitConfigPath = Join-Path $PSScriptRoot 'config' '.gitconfig' | Resolve-Path
+    $customGitConfigPath = "$scriptRoot/config/.gitconfig" | Resolve-Path
     $params = @(
         "config",
         "--global",
@@ -180,6 +182,7 @@ if ($installPsSetup -and $readyToCommit) {
 
     Install-Module posh-git -Scope CurrentUser
     Install-Module oh-my-posh -Scope CurrentUser
+    Update-Module oh-my-posh
     InstallProfile
 }
 
@@ -199,7 +202,7 @@ if ($matlabScripts -and $readyToCommit) {
 if ($installVsCode -and $readyToCommit) {
     Write-Host "Setting up VSCode"
 
-    $exampleVsCodeSettingsPath = Join-Path $PSScriptRoot 'config' 'example.vscode.settings.json'
+    $exampleVsCodeSettingsPath = "$scriptRoot/config/example.vscode.settings.json"
     $dstVsCodeSettingsPath = "$appDataRoot/Code/User/settings.json"
     Copy-SettingsFile -src $exampleVsCodeSettingsPath -dst $dstVsCodeSettingsPath
 }
@@ -207,7 +210,7 @@ if ($installVsCode -and $readyToCommit) {
 # Default file extensions
 if ($installExtensions -and $readyToCommit) {
     Write-Host "Setting up default programs for extensions"
-    & (Join-Path $PSScriptRoot 'setExtensionDefaults.bat')
+    & "$scriptRoot/setExtensionDefaults.bat"
 }
 
 Write-Host "Installation Complete"
