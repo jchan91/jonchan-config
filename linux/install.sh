@@ -53,16 +53,16 @@ sudo apt-get update
 # Install git commands
 # Overwrite existing user's .gitconfig
 git config --global --unset-all include.path
-git config --global --add include.path '~/profile_config/lib/.gitconfig'
-git config --global --add include.path '~/profile_config/linux/config/.gitconfig'
+git config --global --add include.path "$script_dir/../lib/.gitconfig"
+git config --global --add include.path "$script_dir/config/.gitconfig"
 
 # Install light-weight essentials
 sudo apt-get install -y zsh
 sudo apt-get install -y vim
 sudo apt-get install -y curl
 sudo apt-get install -y silversearcher-ag
-sudo snap install tree
-sudo apt install xsel xclip
+sudo apt-get install -y tree
+sudo apt install xsel xclip -y
 
 # Install oh-my-zsh
 # Only install if it's not already there
