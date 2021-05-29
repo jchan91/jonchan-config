@@ -94,10 +94,6 @@ AddToPathIfNotExists($includePaths)
 # Android
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 
-# Java
-$env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_201"
-
-
 ### Aliases
 # Useful utility commands
 function TitleAlias($name) { $host.ui.RawUI.WindowTitle = $name }

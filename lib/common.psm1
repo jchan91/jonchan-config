@@ -164,9 +164,7 @@ function AddProfile($profilePath, $customProfilePath) {
 
 
 function SetupOhMyPosh($script_dir) {
-    Import-Module posh-git
-    Import-Module oh-my-posh
-    Set-PoshPrompt -Theme Honukai
+    Set-PoshPrompt -Theme ys
 
     # Load repository paths to ignore
     $poshGitIgnoreFilePath = "$script_dir/config/poshgit_ignore.txt"
@@ -176,8 +174,6 @@ function SetupOhMyPosh($script_dir) {
             if ($trimmedLine.Length -eq 0) {
                 continue
             }
-
-            $GitPromptSettings.RepositoriesInWhichToDisableFileStatus += $trimmedLine
         }
     }
 }
